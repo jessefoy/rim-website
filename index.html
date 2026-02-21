@@ -1,381 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rooted in Mindfulness — A Dharma Center in Brookfield, Wisconsin</title>
-  <meta name="description" content="A place to develop the clarity, steadiness, and care that are already in you. Meditation, study, and community rooted in the Buddhist tradition." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooted In Mindfulness — Meditation Center — Brookfield, WI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
-  <!-- ── Navigation ───────────────────────────────────────────── -->
-  <nav id="nav">
+<!-- ═══════════════════ NAV ═══════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
     <a href="/" class="nav-logo">
-      Rooted in Mindfulness
-      <span>Brookfield, Wisconsin</span>
+      <svg class="nav-logo-mark" viewBox="0 0 38 38" fill="none">
+        <circle cx="19" cy="19" r="18" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+        <path d="M19 7 C16 12 13 17 13 22 C13 26 15.5 28.5 19 28.5 C22.5 28.5 25 26 25 22 C25 17 22 12 19 7Z" fill="currentColor" opacity="0.55"/>
+        <path d="M12 13.5 C9.5 17 9 21.5 11 25 C12.2 27 14.8 28 17.5 27" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <path d="M26 13.5 C28.5 17 29 21.5 27 25 C25.8 27 23.2 28 20.5 27" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <circle cx="19" cy="29.5" r="2.2" fill="#b84058" opacity="0.75"/>
+      </svg>
+      Rooted In Mindfulness
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#offerings">Offerings</a></li>
-      <li><a href="#teacher">Jesse</a></li>
-      <li><a href="#community">Community</a></li>
-      <li><a href="/schedule" class="nav-cta">See Schedule</a></li>
+      <li><a href="#" class="nav-start">Start Here</a></li>
+      <li><a href="#">Programs</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Donate</a></li>
     </ul>
-    <button class="nav-mobile-toggle" aria-label="Menu">
+    <button class="nav-mobile-btn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
-  </nav>
+  </div>
+</nav>
 
-  <!-- ── Hero ─────────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-eyebrow">A Dharma Center in Brookfield, Wisconsin</p>
-      <h1 class="hero-headline">
-        The clarity you're<br>
-        looking for is<br>
-        <em>already in you.</em>
-      </h1>
-      <p class="hero-body">
-        Rooted in Mindfulness is a place to develop the steadiness, care, and understanding
-        that make a real difference — in your own life, and in the lives of everyone
-        around you. Come as you are.
-      </p>
-      <div class="hero-actions">
-        <a href="/schedule" class="btn-primary">Find a Class or Drop-In</a>
-        <a href="#about" class="btn-secondary">What is this place</a>
-      </div>
-    </div>
 
-    <div class="hero-image">
-      <div class="hero-image-inner"></div>
-      <div class="hero-nature">
-        <!-- Organic leaf/nature SVG illustration -->
-        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M200 480 C200 480 80 380 60 260 C40 140 120 60 200 40 C280 60 360 140 340 260 C320 380 200 480 200 480Z"
-                fill="none" stroke="#4a6741" stroke-width="1.5" opacity="0.6"/>
-          <path d="M200 480 C200 480 150 360 160 240 C170 120 200 60 200 40 C200 60 230 120 240 240 C250 360 200 480 200 480Z"
-                fill="none" stroke="#4a6741" stroke-width="1" opacity="0.4"/>
-          <path d="M200 40 L200 480" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <!-- Veins -->
-          <path d="M200 180 C200 180 150 200 120 220" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <path d="M200 220 C200 220 155 250 130 280" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <path d="M200 260 C200 260 158 298 140 330" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <path d="M200 180 C200 180 250 200 280 220" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <path d="M200 220 C200 220 245 250 270 280" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <path d="M200 260 C200 260 242 298 260 330" stroke="#4a6741" stroke-width="0.75" opacity="0.3"/>
-          <!-- Small dots suggesting dew or seeds -->
-          <circle cx="150" cy="200" r="2" fill="#6b8f62" opacity="0.4"/>
-          <circle cx="130" cy="270" r="1.5" fill="#6b8f62" opacity="0.3"/>
-          <circle cx="250" cy="195" r="2" fill="#6b8f62" opacity="0.4"/>
-          <circle cx="270" cy="265" r="1.5" fill="#6b8f62" opacity="0.3"/>
-          <circle cx="200" cy="350" r="2.5" fill="#6b8f62" opacity="0.35"/>
-        </svg>
-      </div>
-      <div class="hero-image-caption">
-        <blockquote>
-          "After the first drop-in session, I knew I was home."
-        </blockquote>
-        <cite>RIM Community Member</cite>
-      </div>
-    </div>
-  </section>
+<!-- ═══════════════════ HERO ══════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
 
-  <!-- ── Intro Strip ────────────────────────────────────────────── -->
-  <div class="intro-strip">
-    <div class="intro-strip-inner">
-      <p>This is not a wellness brand. It is a dharma center — a real community practicing together, rooted in one of the world's oldest traditions of understanding the mind.</p>
-      <span class="intro-strip-detail">Est. Brookfield, WI</span>
+  <!-- Indra's Net -->
+  <div class="hero-net">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="indras-net" width="72" height="72" patternUnits="userSpaceOnUse">
+          <circle cx="36" cy="36" r="1.5" fill="white"/>
+          <line x1="36" y1="36" x2="72" y2="0"  stroke="white" stroke-width="0.4"/>
+          <line x1="36" y1="36" x2="72" y2="72" stroke="white" stroke-width="0.4"/>
+          <line x1="36" y1="36" x2="0"  y2="72" stroke="white" stroke-width="0.4"/>
+          <line x1="36" y1="36" x2="0"  y2="0"  stroke="white" stroke-width="0.4"/>
+          <circle cx="0"  cy="0"  r="1" fill="white" opacity="0.6"/>
+          <circle cx="72" cy="0"  r="1" fill="white" opacity="0.6"/>
+          <circle cx="0"  cy="72" r="1" fill="white" opacity="0.6"/>
+          <circle cx="72" cy="72" r="1" fill="white" opacity="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#indras-net)"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text-anim">
+          <div class="hero-location">
+            <span class="hero-location-line"></span>
+            <span class="hero-location-text">Brookfield, WI &nbsp;·&nbsp; In-Person &amp; Online</span>
+          </div>
+          <h1 class="hero-headline">
+            There is <em>well-being.</em><br>
+            And the causes<br>
+            of well-being.
+          </h1>
+          <p class="hero-body">
+            A life of more ease, clarity, and meaning is genuinely possible —
+            and it grows through practice, wisdom, and community.
+            RIM is a place where people come to find that path
+            and walk it together.
+          </p>
+          <div class="hero-ctas">
+            <a href="#" class="btn btn-primary">Find Your Way In</a>
+            <a href="#" class="btn btn-outline-light">Explore Programs</a>
+          </div>
+        </div>
+
+        <div class="hero-aside hero-aside-anim">
+          <span class="hero-aside-label">From Our Community</span>
+          <blockquote>
+            "After the first drop-in session, I knew I was 'home.' The warm,
+            welcoming, engaging community were where I wanted to grow
+            my practice."
+          </blockquote>
+          <span class="hero-aside-attr">— Community Member</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ── About ─────────────────────────────────────────────────── -->
-  <section class="about section" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text">
-          <p class="section-label">What this place is</p>
-          <h2>A refuge. A practice. A community.</h2>
-          <p>
-            People come to Rooted in Mindfulness for many different reasons — some in the middle of
-            a hard season, some looking to deepen a practice they've already started, some simply
-            curious about what this tradition has to offer a modern life.
-          </p>
-          <p>
-            What everyone finds is the same: a place where they can show up as they are,
-            learn something real, and practice alongside people who are genuinely trying
-            to live well.
-          </p>
-          <p>
-            No prior experience is needed. No particular beliefs are required.
-            Just a willingness to look honestly at your own experience and see what's possible.
-          </p>
-          <a href="#offerings" class="btn-primary">See What's Offered</a>
-        </div>
-        <div class="about-visual">
-          <div class="about-card">
-            <p class="about-card-quote">
-              "RIM has been a safe place for me to bring my anxiety and brokenness.
-              To feel supported and OK."
-            </p>
-            <span class="about-card-source">RIM Community Member</span>
-            <div class="about-card-offset"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="hero-scroll-cue" style="position:absolute; bottom:1.5rem; left:50%; transform:translateX(-50%); animation: breathe 3s ease-in-out infinite;">
+    <div class="hero-scroll-line"></div>
+    <span style="font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.4);">Settle in</span>
+  </div>
+</section>
 
-  <!-- ── Three Paths ────────────────────────────────────────────── -->
-  <section class="paths section" id="offerings">
-    <div class="container">
-      <div class="paths-header">
-        <p class="section-label">What we offer</p>
-        <h2>Three things that make a real difference</h2>
-        <p>
-          Everything at RIM is built around three foundations — your own inner capacity,
-          a living tradition of understanding, and a community to practice alongside.
-        </p>
-      </div>
-      <div class="paths-grid">
 
-        <div class="path-card">
-          <span class="path-number">01</span>
-          <h3>Your Own Wakefulness</h3>
-          <p>
-            There is already something in you that knows how to be clear, how to care,
-            how to show up. Practice is how you recognize and cultivate it — not achieve it.
-            It's already here.
-          </p>
-          <a href="/practice" class="path-link">Meditation &amp; Practice</a>
-        </div>
+<!-- ═══════════ ORIENTATION ═══════════════════════ -->
+<section class="orientation">
+  <div class="container">
+    <div class="orientation-inner">
+      <h2>Something in us reaches<br>toward <em>wholeness.</em><br>That reaching is the beginning.</h2>
+      <p class="orientation-body">
+        RIM is a modern, welcoming Dharma center — grounded in the timeless
+        wisdom of Buddhist tradition, informed by contemporary science,
+        and open to all: secular seekers, spiritual explorers,
+        those who are hurting and those who are thriving.
+        You are welcome exactly as you are.
+      </p>
 
-        <div class="path-card">
-          <span class="path-number">02</span>
-          <h3>Understanding How Life Works</h3>
-          <p>
-            The Buddhist teaching offers a framework for understanding your experience —
-            how suffering arises, how well-being arises, and what it means to live
-            ethically and skillfully. Practical, not dogmatic.
-          </p>
-          <a href="/teachings" class="path-link">Classes &amp; Study</a>
-        </div>
-
-        <div class="path-card">
-          <span class="path-number">03</span>
-          <h3>Community</h3>
-          <p>
-            You don't do this alone. The community holds something that makes everything
-            else more possible — shared intention, genuine friendship, a place where
-            you can be confused and growing alongside real people.
-          </p>
-          <a href="/community" class="path-link">The Sangha</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Community Voices ──────────────────────────────────────── -->
-  <section class="voices section" id="community">
-    <div class="container voices-inner">
-      <span class="voices-label">From the community</span>
-      <div class="voices-grid">
-
-        <div class="voice-item">
-          <blockquote>
-            RIM has helped me more than I can say. There is light in my heart
-            that was darkened for so long.
-          </blockquote>
-          <cite>Community Member</cite>
-        </div>
-
-        <div class="voice-item">
-          <blockquote>
-            I love how RIM makes Buddhism relevant for everyone. It feels like
-            psychology for discovering a happy life. It just makes sense.
-          </blockquote>
-          <cite>Community Member</cite>
-        </div>
-
-        <div class="voice-item">
-          <blockquote>
-            Jesse is somehow able to bring everyone into the conversation
-            and make the teachings feel accessible to newcomers while still
-            being impactful for seasoned practitioners.
-          </blockquote>
-          <cite>Long-time Member</cite>
-        </div>
-
-        <div class="voice-item">
-          <blockquote>
-            I have not found anyone else who melds the philosophy of mindfulness
-            with the practice itself. There are those who teach, those who do,
-            and only one I have found who does both.
-          </blockquote>
-          <cite>Community Member</cite>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Ways to Begin ─────────────────────────────────────────── -->
-  <section class="begin section">
-    <div class="container">
-      <div class="begin-header">
-        <p class="section-label">How to start</p>
-        <h2>You can begin anywhere.</h2>
-        <p>
-          There's no required starting point. Whether you want to try a single session,
-          explore the teaching more deeply, or just find out what's here —
-          all of those are the right first step.
-        </p>
-      </div>
-
-      <div class="begin-list">
-        <div class="begin-item">
-          <div class="begin-icon">🪷</div>
-          <div class="begin-item-text">
-            <h4>Drop-in Meditation</h4>
-            <p>Come as you are, no commitment. Open to everyone, no experience needed.</p>
-          </div>
-        </div>
-        <div class="begin-item">
-          <div class="begin-icon">📖</div>
-          <div class="begin-item-text">
-            <h4>Classes &amp; Study</h4>
-            <p>Multi-week courses on meditation, the Eightfold Path, and how to apply the teaching.</p>
-          </div>
-        </div>
-        <div class="begin-item">
-          <div class="begin-icon">🌲</div>
-          <div class="begin-item-text">
-            <h4>Retreats &amp; Days of Mindfulness</h4>
-            <p>Half-day and full-day retreats, including nature-based practice sessions.</p>
-          </div>
-        </div>
-        <div class="begin-item">
-          <div class="begin-icon">💻</div>
-          <div class="begin-item-text">
-            <h4>Online Options</h4>
-            <p>Zoom drop-ins and hybrid formats for those who can't always make it in person.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="begin-cta">
-        <p>Not sure where to start? A drop-in is always the right first step.</p>
-        <a href="/schedule" class="btn-primary">See This Week's Schedule</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Teacher ───────────────────────────────────────────────── -->
-  <section class="teacher section" id="teacher">
-    <div class="container">
-      <div class="teacher-grid">
-        <div class="teacher-portrait">
-          <div class="teacher-portrait-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-              <circle cx="12" cy="8" r="4"/>
-              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      <div class="two-truths">
+        <div class="truth">
+          <div class="truth-icon toward">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 3 L10 17 M4 11 L10 17 L16 11" stroke="#3a5c36" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span>Photo of Jesse</span>
           </div>
+          <h3>There is well-being.</h3>
+          <p>And there are causes of well-being — practices, insights, and ways of living that genuinely cultivate it.</p>
         </div>
-        <div class="teacher-content">
-          <p class="section-label">The teacher</p>
-          <h2>Jesse Foy</h2>
-          <p class="teacher-title">Founder &amp; Primary Teacher</p>
-          <p>
-            Jesse teaches from the Theravada Buddhist tradition with a direct, warm, and
-            intellectually honest approach. His teaching is rooted in the Three Refuges —
-            one's own innate capacity for wakefulness, the living tradition of practice,
-            and the support of community.
-          </p>
-          <p>
-            He has a gift for making ancient teachings feel genuinely relevant to the
-            conditions of modern life — without diluting what makes them profound.
-            People often say his classes changed how they experience their lives.
-          </p>
-          <p>
-            He teaches because he believes the dharma belongs to everyone,
-            and that real practice is possible for anyone willing to begin.
-          </p>
-          <a href="/about" class="btn-secondary">More about Jesse and RIM</a>
+        <div class="truth-divider"></div>
+        <div class="truth">
+          <div class="truth-icon away">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 17 L10 3 M4 9 L10 3 L16 9" stroke="#b8873a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>There is suffering.</h3>
+          <p>And there are causes of suffering — patterns we can learn to see clearly, and gently release.</p>
+        </div>
+      </div>
+
+      <p class="orientation-close">
+        This is why people practice. This is what we do together, here.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ VOICES 1 ════════════════════════════ -->
+<section class="voices-1">
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="voices-1-header">
+      <div>
+        <span class="eyebrow" style="color:var(--gold-lt); opacity:0.9;">Community Voices</span>
+        <h2 style="font-family:var(--serif); font-size:var(--text-2xl); font-weight:500; color:white; line-height:1.25;">What people find<br>when they arrive.</h2>
+      </div>
+      <p class="voices-context">These reflections come from RIM community members — shared not to highlight individuals, but to welcome you into what is real.</p>
+    </div>
+
+    <div class="voice-grid">
+      <div class="v-card">
+        <blockquote>
+          "RIM has been a safe place for me to bring my anxiety and brokenness —
+          to feel supported and okay. It is the only place I get to be not judged
+          and not excluded. You allow me to show up with all my baggage and
+          leave it here. Feeling lighter."
+        </blockquote>
+        <span class="v-attr">Community Member</span>
+      </div>
+      <div class="v-card">
+        <blockquote>
+          "There is light in my heart that was darkened for so long."
+        </blockquote>
+        <span class="v-attr">Community Member</span>
+      </div>
+      <div class="v-card">
+        <blockquote>
+          "I love how RIM makes the Dharma relevant for everyone.
+          It feels like psychology for discovering a happy life."
+        </blockquote>
+        <span class="v-attr">Community Member</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ OFFERING ════════════════════════════ -->
+<section class="offering">
+  <div class="container">
+    <div class="offering-inner">
+      <div class="offering-image">
+        <div class="offering-img-frame">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80" alt="Mountain lake at dusk — the quality of stillness we cultivate" />
+        </div>
+        <div class="offering-img-frame-bg"></div>
+      </div>
+      <div class="offering-text">
+        <span class="eyebrow" style="color:var(--gold);">What We Offer</span>
+        <h2><em>Timeless wisdom</em><br>for this life, as it is.</h2>
+        <p class="offering-body">
+          RIM draws from the full river of Buddhist wisdom — Insight practice,
+          the Dharma of all three great traditions — and offers it without dogma,
+          without hierarchy, and without a price tag on the path.
+          Free from jargon. Informed by modern science.
+          Relevant to your Monday morning.
+        </p>
+        <div class="offering-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">🪷</div>
+            <div class="pillar-text">
+              <h4>Weekly Drop-In Sessions</h4>
+              <p>Open guided meditation and Dharma — for all levels. In-person in Brookfield, and online via Zoom.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">📿</div>
+            <div class="pillar-text">
+              <h4>Courses &amp; Study Series</h4>
+              <p>Multi-week programs that go deeper: the Eight-Fold Path, mindful living, compassion practice, and more.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🌲</div>
+            <div class="pillar-text">
+              <h4>Retreats &amp; Days of Practice</h4>
+              <p>Seasonal gatherings — forest walks, silent days, community retreats. A step out of routine and into what matters.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── Location ──────────────────────────────────────────────── -->
-  <section class="location">
-    <div class="container">
-      <div class="location-inner">
-        <div class="location-text">
-          <h3>Find Us in Brookfield</h3>
-          <p>
-            Located in Brookfield, Wisconsin, with in-person and online options available.<br>
-            <a href="/contact">Get directions and contact information →</a>
-          </p>
+
+<!-- ══════════ WHERE TO BEGIN ═════════════════════ -->
+<section class="begin">
+  <div class="container">
+    <div class="begin-header">
+      <span class="eyebrow" style="color:var(--gold);">Where to Begin</span>
+      <h2>Every path in<br>is a <em>valid</em> path in.</h2>
+      <p>Wherever you are, whatever brought you here — there is a natural place to start.</p>
+    </div>
+    <div class="begin-grid">
+      <div class="begin-card">
+        <div class="begin-num">I</div>
+        <h3>I'm new to meditation and practice</h3>
+        <p>You've never done this, or tried on your own and wanted more. Come to a drop-in. No preparation, no performance required.</p>
+        <span class="begin-link">Start with a drop-in</span>
+      </div>
+      <div class="begin-card">
+        <div class="begin-num">II</div>
+        <h3>I'm carrying something heavy</h3>
+        <p>Grief, anxiety, burnout, a season of difficulty. RIM has been a refuge for many people exactly where you are right now.</p>
+        <span class="begin-link">Find support here</span>
+      </div>
+      <div class="begin-card">
+        <div class="begin-num">III</div>
+        <h3>Life is full — I need something practical</h3>
+        <p>Evenings, weekends, Zoom. Practice that works inside a full life, not something that requires you to redesign it.</p>
+        <span class="begin-link">See flexible options</span>
+      </div>
+      <div class="begin-card">
+        <div class="begin-num">IV</div>
+        <h3>I want to practice seriously and go deep</h3>
+        <p>Systematic study, authentic Dharma, retreat practice, a community that holds you to something real.</p>
+        <span class="begin-link">Explore deep practice</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ TEACHER ═════════════════════════════ -->
+<section class="teacher">
+  <div class="container">
+    <div class="teacher-inner">
+      <div class="teacher-photo">
+        <div class="teacher-photo-frame">
+          <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=700&q=80" alt="Jesse, Guiding Teacher at Rooted In Mindfulness" />
         </div>
-        <div class="location-details">
-          <div class="location-detail">
-            <p class="location-detail-label">Location</p>
-            <p class="location-detail-value">Brookfield, WI</p>
+        <p class="teacher-caption">Jesse — Guiding Teacher &amp; Co-Founder</p>
+      </div>
+      <div class="teacher-text">
+        <div class="teacher-eyebrow">
+          <span class="teacher-eyebrow-line"></span>
+          <span>A Word from Our Teacher</span>
+        </div>
+        <h2>I wanted to make a place<br>that could grow itself.</h2>
+        <blockquote class="teacher-quote">
+          "The Dharma keeps showing me that wisdom and healing
+          aren't things I can give anyone. They're already in you.
+          What this community offers is a place — and people —
+          that help you trust what's already there."
+        </blockquote>
+        <p class="teacher-body">
+          When I started RIM, I didn't want to build something that depended
+          on any one person, including me. I wanted to create the conditions
+          for a community to root itself — held together by genuine care,
+          animated by real practice, pointed outward toward the world beyond
+          these walls.
+          <br><br>
+          What I've watched grow here, over many years and many people,
+          is more beautiful than anything I could have designed.
+          If you're wondering whether this is for you: it is.
+          Come once. See for yourself.
+        </p>
+        <span class="teacher-sig">— Jesse</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SANGHA ══════════════════════════════ -->
+<section class="sangha">
+  <div class="container">
+    <div class="sangha-header">
+      <span class="eyebrow" style="color:var(--gold);">The Community</span>
+      <h2>You are not<br>practicing <em>alone.</em></h2>
+      <p>
+        The sangha — the community of practice — is not a feature of RIM.
+        It <em>is</em> RIM. People from all walks of life who have found
+        that walking together makes the walk possible.
+      </p>
+    </div>
+    <div class="sangha-mosaic">
+      <div class="s-card">
+        <blockquote>
+          "Whenever I sit down to meditate on my own, I think of the RIM
+          community as a wider presence of shared intention. I am not alone in this."
+        </blockquote>
+        <span class="s-attr">Community Member</span>
+      </div>
+      <div class="s-card">
+        <blockquote>
+          "After years of feeling despondent that I would never find a
+          community like this, I believe I have found my home."
+        </blockquote>
+        <span class="s-attr">Community Member</span>
+      </div>
+      <div class="s-card">
+        <blockquote>
+          "Such a rare thing — a place where you feel genuinely seen,
+          and also invited to grow."
+        </blockquote>
+        <span class="s-attr">Community Member</span>
+      </div>
+      <div class="s-card">
+        <blockquote>
+          "The group sittings and discussions helped me connect with
+          like-minded seekers — reducing my sense of isolation,
+          reminding me the path is shared."
+        </blockquote>
+        <span class="s-attr">Community Member</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ THE WORLD ═══════════════════════════ -->
+<section class="world">
+  <div class="container">
+    <div class="world-inner">
+      <div class="world-text">
+        <span class="eyebrow" style="color:var(--gold-lt); opacity:0.85;">The Larger Purpose</span>
+        <h2>What grows in you<br>doesn't <em>stay in you.</em></h2>
+        <p class="world-body">
+          The practice of mindfulness and Dharma at RIM isn't
+          self-improvement as an end in itself. What you cultivate —
+          steadiness, compassion, clarity, the capacity to be truly present —
+          moves outward through your relationships, your work, your community.
+          We practice here because the world needs what this practice grows.
+        </p>
+        <div class="world-list">
+          <div class="world-item">
+            <div class="world-num">01</div>
+            <div>
+              <h4>Yourself</h4>
+              <p>Genuine well-being — rooted in wisdom rather than willpower. Not performance. The real thing.</p>
+            </div>
           </div>
-          <div class="location-detail">
-            <p class="location-detail-label">Drop-ins</p>
-            <p class="location-detail-value">Weekly</p>
+          <div class="world-item">
+            <div class="world-num">02</div>
+            <div>
+              <h4>Those You Love</h4>
+              <p>Less reactivity. More presence. The people closest to you feel the difference before you say a word.</p>
+            </div>
           </div>
-          <div class="location-detail">
-            <p class="location-detail-label">Online</p>
-            <p class="location-detail-value">Via Zoom</p>
+          <div class="world-item">
+            <div class="world-num">03</div>
+            <div>
+              <h4>The World We Share</h4>
+              <p>A community practicing compassion and ethical action — rippling outward. This is what a meaningful life looks like.</p>
+            </div>
           </div>
-          <div class="location-detail">
-            <p class="location-detail-label">Experience</p>
-            <p class="location-detail-value">None Required</p>
+        </div>
+      </div>
+      <div class="world-visual">
+        <div class="ripple-wrap">
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+          <div class="ripple-center">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <path d="M22 8 C18 14 15 19 15 25 C15 30 18 33 22 33 C26 33 29 30 29 25 C29 19 26 14 22 8Z" fill="white" opacity="0.28"/>
+              <circle cx="22" cy="34.5" r="2.5" fill="white" opacity="0.5"/>
+            </svg>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── Footer ───────────────────────────────────────────────── -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          Rooted in Mindfulness
-          <span>rootedinmindfulness.org</span>
+
+<!-- ══════════ DANA ════════════════════════════════ -->
+<section class="dana">
+  <div class="container">
+    <div class="dana-inner">
+      <span class="eyebrow" style="color:var(--gold); display:flex; justify-content:center;">A Generosity-Based Approach</span>
+      <h2>No price tag on the path.</h2>
+      <p class="dana-body">
+        RIM is inspired by <em>Dana</em> — the Pali word for generosity of heart,
+        mind, and action. Following the spirit of traditional Buddhist teaching,
+        our programs are offered freely and supported by a community
+        that gives what it can. No one is ever turned away.
+      </p>
+      <p class="dana-body">
+        Membership is accessible at whatever level is right for you.
+        And the practice of generosity itself — giving and receiving
+        with gratitude — is part of what we cultivate together.
+      </p>
+      <blockquote class="dana-quote">
+        "There are no pins to identify levels of achievement, nor does it cost
+        a thousand dollars to reach enlightenment. Take what works. Leave the rest."
+        <br><br>
+        <span style="font-size:var(--text-sm); opacity:0.7; font-style:normal; font-family:var(--sans);">— Community Member</span>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ VOICES 2 ════════════════════════════ -->
+<section class="voices-2">
+  <div class="container">
+    <div class="voices-2-header">
+      <span class="eyebrow" style="color:var(--gold); display:flex; justify-content:center;">Where the Journey Goes</span>
+      <h2>What people carry with them.</h2>
+      <p>These are not extraordinary stories. This is what practice grows, when it's tended.</p>
+    </div>
+    <div class="voices-2-grid">
+      <div class="v2-card">
+        <blockquote>
+          "My life is forever and profoundly changed. I found purpose
+          through intention — to live a life of compassion, kindness,
+          appreciative joy, and generosity."
+        </blockquote>
+        <span class="v2-attr">Community Member</span>
+      </div>
+      <div class="v2-card">
+        <blockquote>
+          "What RIM and this sangha offers is an exquisite gift of ever-growing
+          well-being — to me, and to every relationship I encounter along
+          the path. Rippling, rippling."
+        </blockquote>
+        <span class="v2-attr">Community Member</span>
+      </div>
+      <div class="v2-card">
+        <blockquote>
+          "It didn't take long before I found myself naturally changing —
+          taking better care of myself, communicating with others
+          with more kindness and compassion."
+        </blockquote>
+        <span class="v2-attr">Community Member</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ THRESHOLD ═══════════════════════════ -->
+<section class="threshold">
+  <div class="container">
+    <div class="threshold-inner">
+      <div class="threshold-text">
+        <span class="eyebrow" style="color:var(--gold-lt); opacity:0.85;">Your Next Step</span>
+        <h2>The door is open.<br><em>Come when you're ready.</em></h2>
+        <p class="threshold-body">
+          You don't have to commit to anything.
+          There's no right time and no wrong reason to start.
+          Try one session. Ask a question. Or simply stay in touch —
+          let us come to you gently, when something feels right.
+        </p>
+      </div>
+      <div class="threshold-options">
+        <a href="#" class="threshold-opt">
+          <div>
+            <h4>Attend a Free Drop-In</h4>
+            <p>Tuesdays &amp; Saturdays in-person · Daily on Zoom · No sign-up needed</p>
+          </div>
+          <span class="threshold-opt-arrow">→</span>
+        </a>
+        <a href="#" class="threshold-opt">
+          <div>
+            <h4>Browse Programs &amp; Events</h4>
+            <p>Courses, retreats, community gatherings — find what calls to you</p>
+          </div>
+          <span class="threshold-opt-arrow">→</span>
+        </a>
+        <a href="#" class="threshold-opt">
+          <div>
+            <h4>Become a Community Member</h4>
+            <p>Full access to resources, events, and sangha · Dana-based</p>
+          </div>
+          <span class="threshold-opt-arrow">→</span>
+        </a>
+        <a href="#" class="threshold-opt">
+          <div>
+            <h4>Just Looking? That's Okay.</h4>
+            <p>Send us a message — we're happy to answer any question</p>
+          </div>
+          <span class="threshold-opt-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ NEWSLETTER ══════════════════════════ -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h3>Stay gently connected.</h3>
+    <p>Occasional notes about what's happening at RIM — no noise, no pressure, just an open door.</p>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address" aria-label="Email address" />
+      <button type="submit">Stay in Touch</button>
+    </form>
+    <p class="newsletter-note">We won't share your email or fill your inbox.</p>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <svg width="30" height="30" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="18" stroke="white" stroke-width="1" opacity="0.35"/>
+            <path d="M19 7 C16 12 13 17 13 22 C13 26 15.5 28.5 19 28.5 C22.5 28.5 25 26 25 22 C25 17 22 12 19 7Z" fill="white" opacity="0.3"/>
+            <circle cx="19" cy="29.5" r="2.2" fill="#b84058" opacity="0.65"/>
+          </svg>
+          Rooted In Mindfulness
         </div>
-        <ul class="footer-links">
-          <li><a href="/about">About</a></li>
-          <li><a href="/schedule">Schedule</a></li>
-          <li><a href="/teachings">Teachings</a></li>
-          <li><a href="/community">Community</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/members">Members</a></li>
+        <p>A modern, welcoming Dharma center in Brookfield, Wisconsin. Grounded in Buddhist wisdom. Open to everyone. 501(c)(3) Non-Profit.</p>
+        <address>
+          4040 N. Calhoun Rd.<br>
+          Brookfield, WI 53005
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Begin Here</h4>
+        <ul>
+          <li><a href="#">New to RIM</a></li>
+          <li><a href="#">I need support</a></li>
+          <li><a href="#">Busy life, need flexibility</a></li>
+          <li><a href="#">Deepen my practice</a></li>
         </ul>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Rooted in Mindfulness · Brookfield, Wisconsin</p>
-        <p>A dharma center rooted in the Theravada Buddhist tradition</p>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#">Weekly Drop-Ins</a></li>
+          <li><a href="#">Courses &amp; Series</a></li>
+          <li><a href="#">Retreats</a></li>
+          <li><a href="#">Nature Practice</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="#">Become a Member</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">About RIM</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="footer-bottom">
+      <span>© 2025 Rooted In Mindfulness</span>
+      <span>
+        <a href="tel:4148828932">(414) 882-8932</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:support@rootedinmindfulness.org">support@rootedinmindfulness.org</a>
+      </span>
+    </div>
+  </div>
+</footer>
 
-  <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  </script>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+</script>
 
 </body>
 </html>
