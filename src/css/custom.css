@@ -129,14 +129,6 @@
   align-items: flex-start !important;
 }
 
-/* Newsletter sub-text on dark blue background */
-.footer-newsletter-sub {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 14px;
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-
 /* Apply site fonts to the inline Flodesk form */
 #fd-form-6445bc34c8b890f50782ba90,
 #fd-form-6445bc34c8b890f50782ba90 * {
