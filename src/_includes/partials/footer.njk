@@ -2,10 +2,16 @@
   <div class="container-7">
     <div class="footer-top-row">
 
-      <!-- Newsletter first in DOM so it stacks first on mobile (display:block, no flex order needed) -->
+      <!-- Newsletter first in DOM so it stacks first on mobile -->
       {% if not memberArea %}
       <div class="footer-col-newsletter">
-        <div id="fd-form-6445bc34c8b890f50782ba90"></div>
+        <div class="footer-links-header">Stay Connected</div>
+        <form class="footer-subscribe-form" id="footer-subscribe-form" novalidate>
+          <input type="text"  name="first_name" placeholder="First name"     class="footer-input">
+          <input type="email" name="email"      placeholder="Email address"  class="footer-input" required>
+          <button type="submit" class="footer-subscribe-btn">Subscribe</button>
+          <p class="footer-subscribe-msg" id="footer-subscribe-msg" hidden></p>
+        </form>
       </div>
       {% endif %}
 
@@ -42,27 +48,53 @@
 
 {% if not memberArea %}
 <script>
-(function(w, d, t, h, s, n) {
-  w.FlodeskObject = n;
-  var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
-  w[n] = w[n] || fn;
-  var f = d.getElementsByTagName(t)[0];
-  var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
-  var sm = d.createElement(t);
-  sm.async = true;
-  sm.type = 'module';
-  sm.src = h + s + '.mjs' + v;
-  f.parentNode.insertBefore(sm, f);
-  var sn = d.createElement(t);
-  sn.async = true;
-  sn.noModule = true;
-  sn.src = h + s + '.js' + v;
-  f.parentNode.insertBefore(sn, f);
-})(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+(function () {
+  var form = document.getElementById('footer-subscribe-form');
+  if (!form) return;
 
-window.fd('form', {
-  formId: '6445bc34c8b890f50782ba90',
-  containerEl: '#fd-form-6445bc34c8b890f50782ba90'
-});
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var msg = document.getElementById('footer-subscribe-msg');
+    var btn = form.querySelector('button[type="submit"]');
+    var email = form.email.value.trim();
+
+    if (!email) {
+      msg.textContent = 'Please enter your email address.';
+      msg.hidden = false;
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+    msg.hidden = true;
+
+    try {
+      var res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          first_name: form.first_name.value.trim()
+        })
+      });
+
+      var data = await res.json();
+
+      if (res.ok) {
+        form.innerHTML = '<p class="footer-subscribe-msg footer-subscribe-success">Thank you! You\'re on the list. 🙏</p>';
+      } else {
+        msg.textContent = data.error || 'Something went wrong. Please try again.';
+        msg.hidden = false;
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      }
+    } catch (err) {
+      msg.textContent = 'Something went wrong. Please try again.';
+      msg.hidden = false;
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }
+  });
+}());
 </script>
 {% endif %}

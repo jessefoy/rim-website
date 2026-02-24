@@ -165,10 +165,54 @@
   }
 }
 
-/* Apply site fonts to the inline Flodesk form */
-#fd-form-6445bc34c8b890f50782ba90,
-#fd-form-6445bc34c8b890f50782ba90 * {
-  font-family: 'Open Sans', 'Source Sans 3', sans-serif !important;
+/* Footer newsletter form — custom, no third-party embed */
+.footer-subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.footer-input {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.footer-input::placeholder { color: rgba(255, 255, 255, 0.55); }
+.footer-input:focus        { border-color: rgba(255, 255, 255, 0.75); }
+
+.footer-subscribe-btn {
+  padding: 11px 20px;
+  background: #fff;
+  color: #135274;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer-subscribe-btn:hover    { background: #e8f0f5; }
+.footer-subscribe-btn:disabled { opacity: 0.65; cursor: default; }
+
+.footer-subscribe-msg {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 4px 0 0;
+}
+
+.footer-subscribe-success {
+  color: #a8d5a2;
+  font-weight: 600;
 }
 
 
