@@ -1,0 +1,59 @@
+---
+layout: base.njk
+title: "Community Meditation and Mindfulness Programs"
+---
+
+<div id="Community-Programs-Header-Link" class="section community-programs-page">
+  <div class="content-container left">
+    <h1 class="heading-9-copy">Programs and Events<br></h1>
+    <div class="text-block-9"><strong>Learn and practice with others.</strong> To safely stay connected, sit together, and support each other, Tuesday and Saturday drop-ins are now offered in a hybrid format. You may choose to<strong> attend drop-ins in person at the center or online </strong>via zoom! Other classes are held on zoom. We warmly invite you to come as you are.<a href="https://rimbeta.webflow.io/#"><br></a>
+    </div>
+    <a href="/community-membership" class="button-2-white w-button">Learn How to Join Us</a>
+  </div>
+</div>
+<div class="program-listing-section background-grey">
+  <div class="content-container">
+
+    {% for category in programCategories %}
+    <div class="program_category_container">
+      <div class="program-list-header">
+        <h1 class="program-category-header">{{ category.name }}</h1>
+      </div>
+
+      {% set hasPrograms = false %}
+      {% for program in programs %}
+        {% if program.programCategory and program.programCategory.name == category.name %}
+          {% set hasPrograms = true %}
+          <div class="w-layout-grid programlistblock">
+            <div class="dashboard-list-name-and-date-container">
+              <div class="name-day-and-time-block">
+                <div class="dashboard-title-container">
+                  <h1 class="event-name">{{ program.name }}</h1>
+                </div>
+                {% if program.listingDayAndTimeText %}
+                <div class="dashboard-date-time-container">
+                  <div class="text-block-46">{{ program.listingDayAndTimeText }}</div>
+                </div>
+                {% endif %}
+              </div>
+              {% if program.dashboardSpecialAnnouncement %}
+              <div class="special-program-announcment">
+                <h1 class="special-announcment">{{ program.dashboardSpecialAnnouncement }}</h1>
+              </div>
+              {% endif %}
+            </div>
+            <div class="program-links">
+              <a href="/programs/{{ program.slug.current }}" class="program-list-button w-button">Learn More</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% if not hasPrograms %}
+      <div class="w-dyn-empty"><div>No programs found.</div></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+  </div>
+</div>

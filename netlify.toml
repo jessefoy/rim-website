@@ -1,8 +1,24 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
 
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+# Redirects for Webflow URL compatibility
+[[redirects]]
+  from = "/programs/:slug"
+  to = "/programs/:slug/"
+  status = 301
+
+[[redirects]]
+  from = "/team/:slug"
+  to = "/team/:slug/"
+  status = 301

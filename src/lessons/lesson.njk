@@ -1,0 +1,77 @@
+---
+pagination:
+  data: lessons
+  size: 1
+  alias: lesson
+permalink: /lessons/{{ lesson.slug.current }}/
+layout: base.njk
+---
+{% set title = lesson.lessonTitleDisplayed + " - Rooted In Mindfulness" %}
+
+<div class="section lesson-hero background-light">
+  <div class="content-container centered">
+
+    {% if lesson.includesAudio and lesson.podcastId %}
+    <div class="lesson-audio-block">
+      <div class="captivate-player-embed">
+        <iframe src="https://player.captivate.fm/episode/{{ lesson.podcastId }}" width="100%" height="200" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+    {% elif lesson.headerQuote %}
+    <div class="program-quote-block">
+      <p class="program-quote-text">{{ lesson.headerQuote }}</p>
+      {% if lesson.quoteSource %}
+      <div class="quote-source">
+        <div class="program-quote-source-dash">-</div>
+        <div class="program-quote-source-text">{{ lesson.quoteSource }}</div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<div class="section background-white">
+  <div class="content-container">
+
+    <h1 class="heading-9">{{ lesson.lessonTitleDisplayed }}</h1>
+
+    {% if lesson.teachers and lesson.teachers.length > 0 %}
+    <div class="lesson-teachers">
+      {% for teacher in lesson.teachers %}
+      <a href="/team/{{ teacher.slug.current }}" class="teacher-container w-inline-block">
+        <div class="facilitator-name underline">{{ teacher.name }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if lesson.videoLessonLink %}
+    <div class="lesson-video-block">
+      <div class="w-video w-embed">
+        <iframe src="{{ lesson.videoLessonLink }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;"></iframe>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if lesson.lessonContent %}
+    <div class="rich-text-block-19 w-richtext">{{ lesson.lessonContent | ptToHtml | safe }}</div>
+    {% endif %}
+
+    {% if lesson.downloadableResources and lesson.downloadableResources.length > 0 %}
+    <div class="lesson-resources-block">
+      <h3 class="details-header">Downloadable Resources</h3>
+      {% for resource in lesson.downloadableResources %}
+      <div class="resource-item">
+        <a href="{{ resource.resourceFile.asset.url }}" target="_blank" class="button-2 w-button">
+          <img src="/images/file_upload_black_24dp-1.svg" width="20" alt=""> {{ resource.name }}
+        </a>
+        {% if resource.description %}<p>{{ resource.description }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>

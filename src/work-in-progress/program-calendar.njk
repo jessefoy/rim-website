@@ -1,0 +1,65 @@
+---
+layout: base.njk
+title: "Program Calendar"
+---
+
+{% block content %}
+<div id="Community-Programs-Header-Link" class="section community-programs-page">
+  <div class="content-container left">
+    <h1 class="heading-9-copy">Weekly Calendar<br></h1>
+    <a href="/community-membership" class="button-2-white w-button">Learn How to Join Us</a>
+  </div>
+</div>
+
+<div class="section-7-copy background-grey">
+  <div class="div-block-157">
+    <div>
+
+      {% set days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+      {% for day in days %}
+      <div>
+        <h3 class="list-heading{% if loop.first %} no-top-space{% endif %}">{{ day }}s</h3>
+        {% set dayPrograms = programs | selectattr("dayOfWeek", "equalto", day) | list %}
+        {% if dayPrograms | length %}
+        <div role="list" class="w-dyn-items">
+          {% for program in dayPrograms %}
+          <div role="listitem" class="w-dyn-item">
+            <div class="w-layout-grid programlistblock">
+              <div class="dashboard-list-name-and-date-container">
+                <div class="name-day-and-time-block">
+                  <div class="dashboard-title-container">
+                    <h1 class="event-name">{{ program.name }}</h1>
+                  </div>
+                  {% if program.time %}
+                  <div class="dashboard-date-time-container">
+                    <div class="text-block-46">{{ program.time }}</div>
+                  </div>
+                  {% endif %}
+                </div>
+                {% if program.specialAnnouncement %}
+                <div class="special-program-announcment">
+                  <h1 class="special-announcment">{{ program.specialAnnouncement }}</h1>
+                </div>
+                {% endif %}
+              </div>
+              <div class="program-links">
+                <div class="program-links">
+                  <a href="/programs/{{ program.slug.current }}" class="link-14">Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="w-dyn-empty">
+          <div>No items found.</div>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

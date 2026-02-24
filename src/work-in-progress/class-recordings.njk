@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: "Class Recordings"
+---
+
+{% block content %}
+<div class="section-7-copy background-grey">
+  <div class="content-container">
+    <div class="div-block-113">
+      <h1 class="glossary-header">Class Recordings</h1>
+    </div>
+    <div class="div-block-168">
+      <div class="collection-block">
+        <h3>Monday AM Drop-Ins</h3>
+        <div role="list" class="w-dyn-items">
+          {% for recording in classRecordings %}
+          <div class="recording-list-item">
+            <a href="/class-recording/{{ recording.slug.current }}" class="program-list-button w-button">
+              {{ recording.name }}
+            </a>
+            {% if recording.dateRecorded %}
+            <span class="recording-date">{{ recording.dateRecorded | dateDisplay }}</span>
+            {% endif %}
+          </div>
+          {% else %}
+          <div class="w-dyn-empty">
+            <div>No items found.</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

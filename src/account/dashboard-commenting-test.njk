@@ -1,0 +1,255 @@
+---
+layout: base.njk
+title: "Member Dashboard"
+---
+
+{% block content %}
+<div class="commenting-page-wrapper">
+  <div class="container-14">
+    <div class="updated---nov-16-2023">
+      <div class="comment-container---copy-me">
+        <div data-ms-channel-sort="newest" data-ms-channel="comment-ui" class="comment-channel">
+          <div class="comment-white-box is-top">
+            <div class="comment-section-heading">
+              <div class="comment-h3-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 -960 960 960" width="24">
+                  <path fill="currentColor" d="M280-240q-17 0-28.5-11.5T240-280v-80h520v-360h80q17 0 28.5 11.5T880-680v503q0 27-24.5 37.5T812-148l-92-92H280Zm-40-200-92 92q-19 19-43.5 8.5T80-377v-463q0-17 11.5-28.5T120-880h520q17 0 28.5 11.5T680-840v360q0 17-11.5 28.5T640-440H240Z"></path>
+                </svg></div>
+              <h3 class="comment-h3"><span data-ms-post="count">0</span> Comments</h3>
+              <div data-ms-content="members" class="comment-online">
+                <div class="comment-online-idicator"></div>
+                <div>Active Here: <strong data-ms-channel-presence="count">0</strong></div>
+              </div>
+            </div>
+            <div data-ms-content="members">
+              <div class="ms-profile-image-row">
+                <div class="comment-upload-wrap"><img src="/images/transparent-white-profile-image.svg" alt="" data-ms-member="profile-image" class="comment-image">
+                  <a data-ms-action="profile-image" href="#" class="ms-profile-upload w-inline-block"><img src="/images/file_upload_black_24dp-1.svg" loading="lazy" width="16" alt="">
+                    <div>My Profile Image</div>
+                  </a>
+                </div>
+                <a data-ms-redirect="current-url" data-ms-action="logout" href="#" class="comment-profile-link">Logout</a>
+                <a data-ms-modal="profile" href="#" class="comment-profile-link">Edit Profile</a>
+              </div>
+              <a href="#wf-form-New-Comment-Form" class="comment-new-comment-link w-inline-block">
+                <div class="comment-icon is-top w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewbox="0 -960 960 960" width="100%">
+                    <path fill="currentColor" d="M320-160q-33 0-56.5-23.5T240-240v-80q0-17 11.5-28.5T280-360h80v-90q-30-2-59.5-12.5T249-494q-6-6-9.5-13.5T236-523v-27h-29q-8 0-15.5-3t-13.5-9l-90-90q-12-12-12-28t12-28q29-29 78-42.5t90-13.5q27 0 52.5 4t51.5 15q0-23 16-39t39-16h345q33 0 56.5 23.5T840-720v440q0 50-35 85t-85 35H320Zm120-200h200q17 0 28.5 11.5T680-320v40q0 17 11.5 28.5T720-240q17 0 28.5-11.5T760-280v-440H440v24l229 229q9 9 11 20.5t-3 22.5q-5 11-14 17.5t-23 6.5q-8 0-15.5-3.5T612-412L510-514l-8 8q-14 14-29.5 25T440-464v104ZM224-630h52q17 0 28.5 11.5T316-590v46q12 8 25 11t27 3q23 0 41.5-7t36.5-25l8-8-56-56q-29-29-65-43.5T256-684q-20 0-38 3t-36 9l42 42Z"></path>
+                  </svg></div>
+                <div class="comment-profile-link">Write a New Comment</div>
+              </a>
+            </div>
+          </div>
+          <div data-ms-channel-content="loading" class="comment-loader-wrap"><img src="/images/Z5xD4JlDI7-min.gif" loading="lazy" width="75" alt="" class="comment-loader"></div>
+          <div data-ms-content="!members" class="comment-white-box is-centered">
+            <h4 class="comment-h4">Login or Register to Join the Conversation</h4>
+            <a data-ms-redirect="current-url" data-ms-modal="signup" href="#" class="comment-form-button is-row w-button">Create an Account</a>
+            <a data-ms-redirect="current-url" data-ms-modal="login" href="#" class="comment-form-button is-cancel w-button">Log in</a>
+          </div>
+          <div data-ms-channel-content="!has-posts" class="comment-white-box">
+            <div class="comment-empty-state">
+              <div class="comment-empty-head">Be the first to leave a comment.</div>
+            </div>
+          </div>
+          <div data-ms-channel-content="has-posts" class="comment-has-posts">
+            <div data-ms-post-content="is-typing-section" class="comment-is-typing-section">
+              <div data-ms-post="is-typing" class="commenter-name is-typing">Someone is typing...</div>
+            </div>
+            <div data-ms-post-load="100" data-ms-post="container" class="comment-post-container">
+              <div data-ms-post="item" class="comment-row">
+                <div class="comment-white-box">
+                  <div class="comment-content">
+                    <div class="comment-hover">
+                      <div class="comment-name-row"><img data-ms-post="ownerProfileImage" loading="lazy" alt="" src="/images/transparent-white-profile-image.svg" class="comment-image">
+                        <div>
+                          <div class="commenter-name">
+                            <div data-ms-post-creator="first-name">No Name</div>
+                            <div data-ms-post-creator="last-name">Set</div>
+                            <div class="comment-inline-block">
+                              <div data-ms-post="isModerator" class="comment-mod">Moderator</div>
+                            </div>
+                          </div>
+                          <div data-ms-post="date" class="comment-date">4 years ago</div>
+                        </div>
+                        <div class="comment-reaction-row">
+                          <div data-ms-post-delete="show" class="comment-link-action">
+                            <div data-ms-post-delete="section" class="comment-delete-box">
+                              <a data-ms-post="delete" href="#" class="comment-form-button is-delete w-button">Confirm Delete</a>
+                            </div>
+                            <div>Delete</div>
+                          </div>
+                          <a data-ms-post="edit" href="#" class="comment-link-action w-inline-block">
+                            <div>Edit</div>
+                          </a>
+                          <div class="comment-hide">
+                            <a data-ms-post="dislike" href="#" class="comment-reaction is-active w-inline-block">
+                              <div class="comment-icon-embed-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
+                                  <path fill="currentColor" d="M8.12 9.29L12 13.17l3.88-3.88a.996.996 0 1 1 1.41 1.41l-4.59 4.59a.996.996 0 0 1-1.41 0L6.7 10.7a.996.996 0 0 1 0-1.41c.39-.38 1.03-.39 1.42 0z"></path>
+                                </svg></div>
+                              <div data-ms-post="dislikeCount">0</div>
+                            </a>
+                          </div>
+                          <div class="comment-relative">
+                            <a data-ms-post="like" href="#" class="comment-reaction w-inline-block">
+                              <div class="comment-icon-embed-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewbox="0 -960 960 960" width="1.5em">
+                                  <path fill="currentColor" d="M480-147q-14 0-28.5-5T426-168l-69-63q-106-97-191.5-192.5T80-634q0-94 63-157t157-63q53 0 100 22.5t80 61.5q33-39 80-61.5T660-854q94 0 157 63t63 157q0 115-85 211T602-230l-68 62q-11 11-25.5 16t-28.5 5Z"></path>
+                                </svg></div>
+                              <div data-ms-post="likeCount">0</div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div data-ms-post="hidden">
+                        <div class="comment-moderation-required">Your comment will appear once approved by a moderator. </div>
+                      </div>
+                      <div class="comment-text-wrap">
+                        <div data-ms-post="content" class="comment-text">This is the actual comment. It&#x27;s can be long or short. And must contain only text information. </div>
+                        <div class="comment-inline-block">
+                          <div data-ms-post="is-edited" class="comment-is-edited">(Edited)</div>
+                        </div>
+                      </div>
+                      <div data-ms-content="members" data-ms-post-content="!has-threads" class="comment-reply-wrap">
+                        <a data-ms-post="showThreads" href="#" class="comment-form-button w-inline-block">
+                          <div>Reply</div>
+                        </a>
+                      </div>
+                      <div data-ms-post-edit="section" class="comment-edit-comment-section">
+                        <div class="w-form">
+                          <form id="wf-form-Edit-Comment-Form" name="wf-form-Edit-Comment-Form" data-name="Edit Comment Form" method="get" data-ms-post-edit="form"><textarea class="comment-input w-input" maxlength="5000" name="Edit-Comment" data-name="Edit Comment" data-ms-post-edit="content" placeholder="Edit comment." id="Edit-Comment"></textarea>
+                            <div class="comment-form-button-row">
+                              <a data-ms-post-edit="cancel" href="#" class="comment-form-button is-cancel w-button">Cancel</a><input type="submit" data-wait="Please wait..." class="comment-form-button w-button" value="Save">
+                            </div>
+                          </form>
+                          <div class="comment-unused w-form-done"></div>
+                          <div class="comment-unused w-form-fail"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="comment-reply-section">
+                      <div data-ms-post-content="has-threads" class="comment-has-replies">
+                        <a data-ms-post="showThreads" href="#" class="comment-reply-button w-inline-block">
+                          <div class="comment-reply-btn-content">
+                            <div class="comment-icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
+                                <path fill="currentColor" d="m8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z"></path>
+                              </svg></div>
+                            <div><span data-ms-post="threadCount">2</span> Replies</div>
+                          </div>
+                        </a>
+                      </div>
+                      <div data-ms-thread-sort="oldest" data-ms-thread="section" class="comment-thread-sort">
+                        <div data-ms-thread-load="10" data-ms-thread="container" class="comment-thread-container">
+                          <div data-ms-thread="item" class="comment-thread-box">
+                            <div class="comment-row">
+                              <div class="comment-hover">
+                                <div class="comment-name-row"><img data-ms-thread="ownerProfileImage" loading="lazy" alt="" src="/images/transparent-white-profile-image.svg" class="comment-image">
+                                  <div>
+                                    <div class="commenter-name">
+                                      <div data-ms-thread-creator="first-name">No Name</div>
+                                      <div data-ms-thread-creator="last-name">Set</div>
+                                      <div class="comment-inline-block">
+                                        <div data-ms-thread="isModerator" class="comment-mod">Moderator</div>
+                                      </div>
+                                    </div>
+                                    <div data-ms-thread="date" class="comment-date">2 years ago</div>
+                                  </div>
+                                  <div class="comment-reaction-row">
+                                    <div data-ms-thread-delete="show" class="comment-link-action">
+                                      <div data-ms-thread-delete="section" class="comment-delete-box">
+                                        <a data-ms-thread="delete" href="#" class="comment-form-button is-delete w-button">Delete Forever</a>
+                                      </div>
+                                      <div>Delete</div>
+                                    </div>
+                                    <a data-ms-thread="edit" href="#" class="comment-link-action w-inline-block">
+                                      <div>Edit</div>
+                                    </a>
+                                    <div class="comment-hide">
+                                      <a data-ms-thread="dislike" href="#" class="comment-reaction w-inline-block">
+                                        <div class="comment-icon-embed-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
+                                            <path fill="currentColor" d="M8.12 9.29L12 13.17l3.88-3.88a.996.996 0 1 1 1.41 1.41l-4.59 4.59a.996.996 0 0 1-1.41 0L6.7 10.7a.996.996 0 0 1 0-1.41c.39-.38 1.03-.39 1.42 0z"></path>
+                                          </svg></div>
+                                        <div data-ms-thread="dislikeCount">0</div>
+                                      </a>
+                                    </div>
+                                    <div class="comment-relative">
+                                      <a data-ms-thread="like" href="#" class="comment-reaction w-inline-block">
+                                        <div class="comment-icon-embed-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewbox="0 -960 960 960" width="1.5em">
+                                            <path fill="currentColor" d="M480-147q-14 0-28.5-5T426-168l-69-63q-106-97-191.5-192.5T80-634q0-94 63-157t157-63q53 0 100 22.5t80 61.5q33-39 80-61.5T660-854q94 0 157 63t63 157q0 115-85 211T602-230l-68 62q-11 11-25.5 16t-28.5 5Z"></path>
+                                          </svg></div>
+                                        <div data-ms-thread="likeCount">0</div>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div data-ms-thread="hidden">
+                                  <div class="comment-moderation-required">Your comment will appear once approved by a moderator. </div>
+                                </div>
+                                <div class="comment-text-wrap">
+                                  <div data-ms-thread="content" class="comment-text">This is the actual comment. It&#x27;s can be long or short. And must contain only text information. </div>
+                                  <div class="comment-inline-block">
+                                    <div data-ms-thread="is-edited" class="comment-is-edited">(Edited)</div>
+                                  </div>
+                                </div>
+                                <div data-ms-thread-edit="section" class="comment-edit-thread">
+                                  <div class="comment-no-margin w-form">
+                                    <form id="wf-form-Edit-Thread-Form" name="wf-form-Edit-Thread-Form" data-name="Edit Thread Form" method="get" data-ms-thread-edit="form"><textarea class="comment-input w-input" data-ms-thread-edit="content" maxlength="5000" name="Edit-Thread" data-name="Edit Thread" placeholder="Edit thread." id="Edit-Thread"></textarea>
+                                      <div class="comment-form-button-row">
+                                        <a data-ms-thread-edit="cancel" href="#" class="comment-form-button is-cancel w-button">Cancel</a><input type="submit" data-wait="Please wait..." class="comment-form-button w-button" value="Save">
+                                      </div>
+                                    </form>
+                                    <div class="comment-unused w-form-done"></div>
+                                    <div class="comment-unused w-form-fail"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <a data-ms-thread="loadMore" href="#" class="comment-form-button is-load-more w-button">Load More Replies</a>
+                        <div data-ms-content="members" class="comment-reply-form w-form">
+                          <form id="wf-form-New-Thread-Form" name="wf-form-New-Thread-Form" data-name="New Thread Form" method="get" data-ms-form="thread">
+                            <div class="comment-form-input-row">
+                              <div class="comment-input-wrap">
+                                <h4 class="comment-h4">New Reply</h4><textarea class="comment-input w-input" maxlength="5000" name="New-Thread" data-ms-thread="content" data-name="New Thread" placeholder="Write a new reply. " id="New-Thread"></textarea>
+                              </div>
+                            </div>
+                            <div class="comment-form-button-row">
+                              <a data-ms-post="showThreads" href="#" class="comment-form-button is-cancel w-button">Cancel</a>
+                              <div class="comment-button-wrap"><input type="submit" data-wait="Please wait..." class="comment-form-button w-button" value="Submit"></div>
+                            </div>
+                          </form>
+                          <div class="w-form-done">
+                            <div>Thank you! Your submission has been received!</div>
+                          </div>
+                          <div class="w-form-fail">
+                            <div>Oops! Something went wrong while submitting the form.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a data-ms-post="loadMore" href="#" class="comment-load-more-card w-button">Load More Comments</a>
+          </div>
+          <div data-ms-content="members" class="comment-white-box is-comment">
+            <div class="comment-form w-form">
+              <form id="wf-form-New-Comment-Form" name="wf-form-New-Comment-Form" data-name="New Comment Form" method="get" data-ms-form="post">
+                <div class="comment-form-input-row">
+                  <div class="comment-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewbox="0 -960 960 960" width="100%">
+                      <path fill="currentColor" d="M320-160q-33 0-56.5-23.5T240-240v-80q0-17 11.5-28.5T280-360h80v-90q-30-2-59.5-12.5T249-494q-6-6-9.5-13.5T236-523v-27h-29q-8 0-15.5-3t-13.5-9l-90-90q-12-12-12-28t12-28q29-29 78-42.5t90-13.5q27 0 52.5 4t51.5 15q0-23 16-39t39-16h345q33 0 56.5 23.5T840-720v440q0 50-35 85t-85 35H320Zm120-200h200q17 0 28.5 11.5T680-320v40q0 17 11.5 28.5T720-240q17 0 28.5-11.5T760-280v-440H440v24l229 229q9 9 11 20.5t-3 22.5q-5 11-14 17.5t-23 6.5q-8 0-15.5-3.5T612-412L510-514l-8 8q-14 14-29.5 25T440-464v104ZM224-630h52q17 0 28.5 11.5T316-590v46q12 8 25 11t27 3q23 0 41.5-7t36.5-25l8-8-56-56q-29-29-65-43.5T256-684q-20 0-38 3t-36 9l42 42Z"></path>
+                    </svg></div>
+                  <div class="comment-input-wrap"><textarea class="comment-input is-comment w-input" data-ms-post="content" maxlength="5000" name="New-Comment" data-name="New Comment" placeholder="Leave a positive comment..." data-ms-content="members" id="New-Comment"></textarea><input type="submit" data-wait="Please wait..." data-ms-content="members" class="comment-form-button is-new-comment w-button" value="Submit"></div>
+                </div>
+              </form>
+              <div class="comment-unused w-form-done"></div>
+              <div class="comment-unused w-form-fail"></div>
+            </div>
+          </div>
+          <div data-ms-post="loading" class="comment-loader-wrap is-fixed"><img src="/images/Z5xD4JlDI7-min.gif" loading="lazy" width="75" alt="" class="comment-loader">
+            <div>Loading</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+---
+pagination:
+  data: magazineArticles
+  size: 1
+  alias: article
+permalink: /magazine-articles/{{ article.slug.current }}/
+layout: base.njk
+---
+{% set title = article.articleTitleDisplayed + " - Rooted In Mindfulness" %}
+
+<div data-ms-content="members" class="section background-white">
+  <div class="content-container">
+    <h1 class="heading-9">{{ article.articleTitleDisplayed }}</h1>
+    {% if article.articleContent %}
+    <div class="rich-text-block-19 w-richtext">{{ article.articleContent | ptToHtml | safe }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div data-ms-content="!members" class="section background-white">
+  <div class="content-container">
+    <h2>Members Only</h2>
+    <p>This content is available to RIM community members.</p>
+    <div class="become-member-buttons">
+      <a href="/community-membership" class="button-2 w-button">Become a Member</a>
+      <a data-ms-redirect="current-url" data-ms-modal="login" href="#" class="already-member-link"> or Login</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+---
+pagination:
+  data: volunteerPositions
+  size: 1
+  alias: position
+permalink: /volunteer-positions/{{ position.slug.current }}/
+layout: base.njk
+---
+{% set title = position.name + " - Volunteer - Rooted In Mindfulness" %}
+
+<div class="section background-white">
+  <div class="content-container">
+
+    <a href="/volunteerism/volunteer" class="breadcrumb-link w-inline-block">
+      <div class="text-block-58">← Volunteer Opportunities</div>
+    </a>
+
+    <h1 class="heading-9">{{ position.name }}</h1>
+
+    <div class="position-status">
+      {% if position.isOpen %}
+      <span class="open-badge">Open</span>
+      {% else %}
+      <span class="filled-badge">Filled</span>
+      {% endif %}
+    </div>
+
+    {% if position.positionDescription %}
+    <div class="rich-text-block-19 w-richtext">{{ position.positionDescription | ptToHtml | safe }}</div>
+    {% endif %}
+
+    {% if position.currentVolunteers and position.currentVolunteers.length > 0 %}
+    <div class="current-volunteers">
+      <h3 class="details-header">Current Volunteers</h3>
+      {% for volunteer in position.currentVolunteers %}
+      <a href="/team/{{ volunteer.slug.current }}" class="teacher-container w-inline-block">
+        <div class="facilitator-name underline">{{ volunteer.name }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>

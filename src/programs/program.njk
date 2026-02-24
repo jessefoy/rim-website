@@ -1,0 +1,149 @@
+---
+pagination:
+  data: programs
+  size: 1
+  alias: program
+permalink: /programs/{{ program.slug.current }}/
+layout: base.njk
+---
+{% set title = program.name + " - Rooted In Mindfulness" %}
+
+<div id="Community-Programs-Header-Link" class="program-header-section community-programs-page">
+  <div class="program-title-block">
+    <a href="/community-programs" class="breadcrumb-link w-inline-block">
+      <div class="text-block-58">{{ program.programCategory.name if program.programCategory else "Programs" }}</div>
+    </a>
+    <h1 class="heading-9">{{ program.name }}</h1>
+    {% if program.tagline %}<h2 class="heading-39">{{ program.tagline }}</h2>{% endif %}
+  </div>
+</div>
+
+<div class="program-details-section">
+  <div class="content-container centered">
+
+    {% if program.quote %}
+    <div class="program-quote-block">
+      <p class="program-quote-text">{{ program.quote }}</p>
+      {% if program.quoteSource %}
+      <div class="quote-source">
+        <div class="program-quote-source-dash">-</div>
+        <div class="program-quote-source-text">{{ program.quoteSource }}</div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="program-description-and-details-block">
+
+      {% if program.programDescription %}
+      <div class="rich-text-block-19 w-richtext">{{ program.programDescription | ptToHtml | safe }}</div>
+      {% endif %}
+
+      {% if program.specialNotes %}
+      <div class="additional-program-noted w-richtext">{{ program.specialNotes | ptToHtml | safe }}</div>
+      {% endif %}
+
+      <div class="registration-details-section">
+        <div class="program-details-content no-bottom-margin">
+          <h3 class="details-header">Details:</h3>
+          <div>
+            {% if program.dateText %}
+            <div class="_10px-spacer"></div>
+            <div><img src="/images/Date.png" width="20" height="20" alt="">
+              <div class="program-detail-item">{{ program.dateText }}</div>
+            </div>
+            {% endif %}
+
+            {% if program.timeText %}
+            <div class="_10px-spacer"></div>
+            <div><img src="/images/Time.png" width="25" height="25" alt="">
+              <div class="program-detail-item">{{ program.timeText }}</div>
+            </div>
+            {% endif %}
+
+            {% if program.locationText %}
+            <div class="_10px-spacer"></div>
+            <div class="date-time-register-dana-block"><img src="/images/Location.png" width="30" height="30" alt="">
+              <div class="program-detail-item">{{ program.locationText }}</div>
+              {% if program.locationLink %}
+              <a href="{{ program.locationLink }}" target="_blank" class="w-inline-block">
+                <div class="more-details-trigger-text-dana">--></div>
+              </a>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            {% if program.danaText %}
+            <div class="_10px-spacer"></div>
+            <div class="date-time-register-dana-block"><img src="/images/Dana.png" width="35" height="35" alt="">
+              <div class="accordion-item-trigger">
+                <div class="program-detail-item">{{ program.danaText }}</div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if program.registrationRequired %}
+            <div class="_10px-spacer"></div>
+            <div class="date-time-register-dana-block"><img src="/images/Registration_Icon.png" width="20" height="20" alt="">
+              <a href="#registration-section" class="w-inline-block">
+                <div class="program-detail-item link"><strong>Please Register to Attend ↓</strong></div>
+              </a>
+            </div>
+            {% endif %}
+
+            {% if program.teacherFacilitators and program.teacherFacilitators.length > 0 %}
+            <div class="_10px-spacer"></div>
+            <h3 class="details-header top-margin-20-px">Facilitators:</h3>
+            {% for teacher in program.teacherFacilitators %}
+            <a href="/team/{{ teacher.slug.current }}" class="teacher-container w-inline-block">
+              {% if teacher.bioPicture %}
+              <img alt="{{ teacher.name }}" width="35" height="35" src="{{ teacher.bioPicture.asset.url }}" class="facilitator">
+              {% endif %}
+              <div class="facilitator-name underline">{{ teacher.name }}</div>
+            </a>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div id="registration-section" class="program-registration-section">
+        <div data-ms-content="!members" class="logged-out---message">
+          <h3 class="details-header">Join Us</h3>
+          {% if program.signedOutInstructions %}
+          <div class="signed-out-instuctions w-richtext">{{ program.signedOutInstructions | ptToHtml | safe }}</div>
+          {% endif %}
+          <div class="become-member-buttons">
+            <a href="/community-membership" class="button-2 w-button">Become a Member</a>
+            <a data-ms-redirect="current-url" data-ms-modal="login" href="#" class="already-member-link"> or Login</a>
+          </div>
+        </div>
+
+        {% if program.registrationRequired and not program.registrationClosed %}
+        <div data-ms-content="members" class="logged-in---registration-required">
+          <h3 class="details-header">Register</h3>
+          {% if program.signedInInstructions %}
+          <div class="signed-in-instructions w-richtext">{{ program.signedInInstructions | ptToHtml | safe }}</div>
+          {% endif %}
+          {% if program.filloutRegistrationFormId %}
+          <div class="fillout-registration-embed w-embed w-script">
+            <div style="width:100%;height:500px;" data-fillout-id="{{ program.filloutRegistrationFormId }}" data-fillout-embed-type="standard" data-fillout-inherit-parameters="" data-fillout-dynamic-resize=""></div>
+            <script src="https://server.fillout.com/embed/v1/"></script>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        {% if not program.registrationRequired %}
+        <div data-ms-content="members" class="logged-in---registration-not-required-message">
+          <h3 class="details-header">No Registration Required</h3>
+          {% if program.signedInInstructions %}
+          <div class="signed-in-instructions w-richtext">{{ program.signedInInstructions | ptToHtml | safe }}</div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>

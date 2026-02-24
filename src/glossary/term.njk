@@ -1,0 +1,32 @@
+---
+pagination:
+  data: glossary
+  size: 1
+  alias: term
+permalink: /glossary/{{ term.slug.current }}/
+layout: base.njk
+---
+{% set title = term.name + " - Handful of Leaves Glossary" %}
+
+<div class="section background-white">
+  <div class="content-container">
+
+    <a href="/work-in-progress/handful-of-leaves-glossary" class="breadcrumb-link w-inline-block">
+      <div class="text-block-58">← Glossary</div>
+    </a>
+
+    <h1 class="heading-9">{{ term.name }}</h1>
+
+    {% if term.pali or term.sanskrit %}
+    <div class="glossary-term-languages">
+      {% if term.pali %}<p><strong>Pali:</strong> {{ term.pali }}</p>{% endif %}
+      {% if term.sanskrit %}<p><strong>Sanskrit:</strong> {{ term.sanskrit }}</p>{% endif %}
+    </div>
+    {% endif %}
+
+    {% if term.synonyms %}
+    <p class="glossary-synonyms"><strong>Also known as:</strong> {{ term.synonyms }}</p>
+    {% endif %}
+
+  </div>
+</div>

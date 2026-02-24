@@ -1,0 +1,61 @@
+---
+pagination:
+  data: classRecordings
+  size: 1
+  alias: recording
+permalink: /class-recording/{{ recording.slug.current }}/
+layout: base.njk
+---
+{% set title = recording.name + " - Class Recordings - Rooted In Mindfulness" %}
+
+<div class="section background-white">
+  <div class="content-container">
+
+    <a href="/work-in-progress/class-recordings" class="breadcrumb-link w-inline-block">
+      <div class="text-block-58">← Class Recordings</div>
+    </a>
+
+    <h1 class="heading-9">{{ recording.name }}</h1>
+
+    {% if recording.dateRecorded %}
+    <p class="recording-date">{{ recording.dateRecorded | dateDisplay }}</p>
+    {% endif %}
+
+    {% if recording.teachers and recording.teachers.length > 0 %}
+    <div class="lesson-teachers">
+      {% for teacher in recording.teachers %}
+      <a href="/team/{{ teacher.slug.current }}" class="teacher-container w-inline-block">
+        <div class="facilitator-name underline">{{ teacher.name }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if recording.audioEmbedCode %}
+    <div class="lesson-audio-block">
+      {{ recording.audioEmbedCode | safe }}
+    </div>
+    {% endif %}
+
+    {% if recording.videoLink %}
+    <div class="lesson-video-block">
+      <div class="w-video w-embed">
+        <iframe src="{{ recording.videoLink }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;"></iframe>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if recording.description %}
+    <div class="rich-text-block-19 w-richtext">{{ recording.description | ptToHtml | safe }}</div>
+    {% endif %}
+
+    {% if recording.topics and recording.topics.length > 0 %}
+    <div class="recording-topics">
+      {% for topic in recording.topics %}
+      <span class="topic-tag">{{ topic.name }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>

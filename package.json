@@ -1,0 +1,22 @@
+{
+  "name": "rim-website",
+  "version": "1.0.0",
+  "description": "Rooted In Mindfulness website — Eleventy + Sanity",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "sanity": "cd sanity && npx sanity dev"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@portabletext/to-html": "^2.0.0",
+    "@sanity/client": "^6.0.0",
+    "markdown-it": "^14.0.0"
+  },
+  "devDependencies": {
+    "csv-parse": "^6.1.0",
+    "domhandler": "^5.0.3",
+    "dotenv": "^16.0.0",
+    "htmlparser2": "^10.1.0"
+  }
+}

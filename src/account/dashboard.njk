@@ -1,0 +1,150 @@
+---
+layout: base.njk
+title: "Member Dashboard"
+---
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="dashboard-section">
+    <div class="dashboard-content" data-ms-content="members">
+      <h2 class="heading-50">Welcome <span data-ms-member="first-name">{$firstName}</span>!</h2>
+      <h4 class="heading-40">Today&#x27;s Zoom Session Links:</h4>
+      <div class="todays-offering">
+        <div class="programs-collection-list-wrapper w-dyn-list">
+          <div role="list" class="programs-collection-list w-dyn-items">
+            {% for program in dashboardPrograms %}
+            <div role="listitem" class="program-collection-item w-dyn-item">
+              <div class="w-layout-grid programlistblock">
+                <h1 class="day-filtering" style="display:none;">{{ program.dayOfWeek.name if program.dayOfWeek else "" }}</h1>
+                <div class="dashboard-list-name-and-date-container">
+                  <div class="name-day-and-time-block">
+                    <div class="dashboard-title-container">
+                      <h1 class="event-name">{{ program.name }}</h1>
+                      <h1 class="event-name hide">:</h1>
+                    </div>
+                    <div class="dashboard-date-time-container">
+                      <div class="text-block-46">{{ program.dayAndTimeText }}</div>
+                    </div>
+                  </div>
+                  {% if program.earlyArrivalMessage %}
+                  <h1 class="presession-message">{{ program.earlyArrivalMessage }}</h1>
+                  {% endif %}
+                  {% if program.specialAnnouncement %}
+                  <div class="special-program-announcment">
+                    <h1 class="special-announcment">{{ program.specialAnnouncement }}</h1>
+                  </div>
+                  {% endif %}
+                </div>
+                <div class="program-links">
+                  <div class="program-links">
+                    <a data-zoom="{{ program.zoomLink }}" data-name="{{ program.name }}" data-time="{{ program.dayAndTimeText }}" href="/account/waiting-room" class="attendance-button w-button">Join</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="w-dyn-empty">
+              <div>No items found.</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!--  ============================================================  -->
+<!--  ROOTED IN MINDFULNESS - DASHBOARD ZOOM LINK HANDLER         -->
+<!--  This script filters programs by day and handles zoom links   -->
+<!--  Last updated: July 2025                                      -->
+<!--  ============================================================  -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // ========================================
+    // DAY FILTERING SECTION
+    // Shows only programs that run today
+    // ========================================
+    /**
+     * Get current day in Milwaukee timezone for filtering programs
+     * Milwaukee classes should only show on their scheduled days
+     */
+    function getMilwaukeeDay() {
+        const date = new Date();
+        const options = {
+            timeZone: 'America/Chicago',  // Milwaukee timezone
+            weekday: 'long'
+        };
+        return new Intl.DateTimeFormat('en-US', options).format(date);
+    }
+    // Get today's day name in Milwaukee
+    const currentDay = getMilwaukeeDay();
+    console.log('Current day in Milwaukee:', currentDay);
+    // Find all program items on the dashboard
+    const programItems = document.querySelectorAll('.programlistblock');
+    console.log('Found', programItems.length, 'program items to filter');
+    // Filter programs - show only those scheduled for today
+    programItems.forEach(item => {
+        const itemDayElement = item.querySelector('.day-filtering');
+        if (itemDayElement) {
+            // Get days this program runs (comma-separated list from CMS)
+            const itemDays = itemDayElement.textContent
+                .split(",")
+                .map(day => day.trim());
+            // Hide programs that don't run today
+            if (!itemDays.includes(currentDay)) {
+                item.style.display = 'none';
+                console.log('Hiding program - not scheduled for', currentDay);
+            } else {
+                console.log('Showing program - scheduled for', currentDay);
+            }
+            // Hide the day filtering element (it's just for data storage)
+            itemDayElement.style.display = 'none';
+        }
+    });
+    // ========================================
+    // ZOOM LINK REDIRECTION SECTION
+    // Handles clicks on zoom links to redirect to waiting room
+    // ========================================
+    // Find all links that should go to the waiting room
+    const zoomButtons = document.querySelectorAll('a[href="/account/waiting-room"]');
+    console.log('Found', zoomButtons.length, 'zoom buttons to handle');
+    zoomButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // Stop normal link behavior
+            try {
+                // Get program data from CMS via data attributes
+                const programName = this.getAttribute('data-name') || 'Class';
+                const eventTime = this.getAttribute('data-time') || '';
+                const zoomLink = this.getAttribute('data-zoom') || '';
+                console.log('Zoom button clicked for:', programName);
+                console.log('Event time:', eventTime);
+                console.log('Zoom link present:', !!zoomLink);
+                // Validate that we have essential data
+                if (!zoomLink.trim()) {
+                    console.error('No zoom link found for program:', programName);
+                    alert('Sorry, the zoom link is not available for this class. Please contact support.');
+                    return;
+                }
+                // Build waiting room URL with program data
+                const waitingRoomUrl = `/account/waiting-room?` +
+                    `name=${encodeURIComponent(programName)}&` +
+                    `time=${encodeURIComponent(eventTime)}&` +
+                    `zoom=${encodeURIComponent(zoomLink)}`;
+                console.log('Redirecting to waiting room:', waitingRoomUrl);
+                window.location.href = waitingRoomUrl;
+            } catch (error) {
+                console.error('Error processing zoom link click:', error);
+                alert('Sorry, there was an error accessing the waiting room. Please try again.');
+            }
+        });
+    });
+    console.log('Dashboard zoom link handler initialized successfully');
+});
+</script>
+<!--  ============================================================  -->
+<!--  END DASHBOARD ZOOM LINK HANDLER                              -->
+<!--  ============================================================  -->
+{% endblock %}

@@ -1,0 +1,431 @@
+---
+layout: base.njk
+title: "Waiting Room"
+---
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="dashboard-section">
+    <div class="div-block-162">
+      <h1 id="Waiting-Room-Header" class="waiting-room-header">Waiting Room<br></h1>
+      <div class="div-block-163">
+        <h1 id="Waiting-Room-Message" class="heading-52">Message</h1>
+      </div>
+      <div id="Waiting-Room-Zoom-Note" class="waiting-room-zoom-note">
+        <div id="Waiting-Room-Sub-Message" class="text-block-95"><strong>NOTE:</strong> The Zoom link will appear about 5 minutes before the event begins.</div>
+      </div>
+      <div id="Waiting-Room-Slider" class="slider-container">
+        <div class="slider-overlay-prevent-click"></div>
+        <div data-delay="8000" data-animation="cross" class="waiting-room-slider w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="10" data-duration="600" data-infinite="true">
+          <div class="mask w-slider-mask">
+            <div class="w-slide">
+              <div class="div-block-165">
+                <h3 class="heading-53">Welcome, we&#x27;re glad you&#x27;re here!</h3>
+                <p class="paragraph-26">RIM is a community for all who wish to practice meditation and mindful living. <br>~<br>Thanks for being part of it. <br></p>
+              </div>
+            </div>
+            <div class="slide w-slide">
+              <div class="div-block-165">
+                <h3 class="heading-53">Help create a safe and supportive community space.</h3>
+                <p class="paragraph-26">By holding it with kindness, respect, and grace for others and ourselves.</p>
+              </div>
+            </div>
+            <div class="w-slide">
+              <div class="div-block-165">
+                <h3 class="heading-53"><em>Everyone&#x27;s voice supports our learning and practice!</em></h3>
+                <p class="paragraph-26"> Your shares and questions are welcome and appreciated. Please offer others the opportunity to share too. </p>
+              </div>
+            </div>
+            <div class="w-slide">
+              <div class="div-block-165">
+                <h3 class="heading-53">Without a sense of caring, there can be no sense of community.<br></h3>
+                <p class="paragraph-26">Anthony J. D&#x27;Angelo</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-nav w-slider-nav"></div>
+        </div>
+      </div>
+      <div class="div-block-164">
+        <a id="join-zoom-button" href="#" class="waiting-room-attendance-button w-button">Join us on Zoom</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!--  ============================================================  -->
+<!--  ROOTED IN MINDFULNESS - ENHANCED WAITING ROOM CONTROLLER    -->
+<!--  Smart messaging to help users know if they're in the right   -->
+<!--  place and when their program actually happens                -->
+<!--  Last updated: August 2025                                    -->
+<!--  ============================================================  -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ========================================
+    // CONFIGURATION SECTION
+    // ========================================
+    const CONFIG = {
+        MINUTES_BEFORE_EVENT: 10,        // Show link 10 minutes before class
+        BUFFER_MS: 10000,                // 10 second buffer to prevent early access
+        EVENT_DURATION_MINUTES: 120,    // Keep link available for 2 hours after start
+                                        // (accommodates late arrivals, technical issues,
+                                        // classes running over, but doesn't interfere with next programs)
+        UPDATE_INTERVAL_MS: 10000        // Check status every 10 seconds
+    };
+    // ========================================
+    // URL PARAMETER EXTRACTION SECTION
+    // ========================================
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventName = urlParams.get('name');
+    const eventTime = urlParams.get('time');
+    const zoomLink = urlParams.get('zoom');
+    console.log('Program Data Received:');
+    console.log('- Event Name:', eventName);
+    console.log('- Event Time:', eventTime);
+    console.log('- Zoom Link Present:', !!zoomLink);
+    // ========================================
+    // DOM ELEMENT REFERENCES SECTION
+    // ========================================
+    const elements = {
+        mainMessage: document.getElementById('Waiting-Room-Message'),      // Main message area
+        subMessage: document.getElementById('Waiting-Room-Sub-Message'),   // Sub message/note area
+        header: document.getElementById('Waiting-Room-Header'),            // Main header
+        joinButton: document.getElementById('join-zoom-button'),           // Zoom link button
+        slider: document.getElementById('Waiting-Room-Slider'),            // Waiting room content
+        sliderContainer: document.querySelector('.slider-container') ||    // Try multiple selectors for slider container
+                        document.querySelector('[class*="slider"]') ||
+                        document.querySelector('[id*="slider"]') ||
+                        document.querySelector('.w-slider'),
+        zoomNote: document.getElementById('Waiting-Room-Zoom-Note')        // Timing note
+    };
+    // Set up the page with program data
+    if (elements.joinButton && zoomLink) {
+        elements.joinButton.href = decodeURIComponent(zoomLink);
+        console.log('Set zoom link');
+    }
+    // Debug: Log which elements we found
+    console.log('DOM Elements found:');
+    Object.keys(elements).forEach(key => {
+        console.log(`- ${key}:`, elements[key] ? 'FOUND' : 'NOT FOUND');
+    });
+    // ========================================
+    // TIME PARSING SECTION
+    // ========================================
+    /**
+     * Parse various time formats and extract start time
+     */
+    function parseEventTime(timeString) {
+        if (!timeString || !timeString.trim()) {
+            console.log('No time string provided');
+            return null;
+        }
+        try {
+            console.log('Parsing time string:', timeString);
+            let cleanTime = timeString.trim();
+            // Extract just the start time (before any separators)
+            const separators = ['-', '–', '—', ' to ', ' - ', ' – ', ' — '];
+            for (const sep of separators) {
+                if (cleanTime.includes(sep)) {
+                    cleanTime = cleanTime.split(sep)[0].trim();
+                    console.log('Extracted start time:', cleanTime);
+                    break;
+                }
+            }
+            // Parse time format
+            const timeMatch = cleanTime.match(/(\d{1,2}):?(\d{0,2})\s*(AM|PM|am|pm)/i);
+            if (!timeMatch) {
+                console.warn('Could not parse time format:', timeString);
+                return null;
+            }
+            let hours = parseInt(timeMatch[1]);
+            let minutes = timeMatch[2] ? parseInt(timeMatch[2]) : 0;
+            const period = timeMatch[3].toUpperCase();
+            // Convert to 24-hour format
+            if (period === 'PM' && hours !== 12) hours += 12;
+            if (period === 'AM' && hours === 12) hours = 0;
+            console.log('Parsed time:', { hours, minutes, period });
+            return { hours, minutes };
+        } catch (error) {
+            console.error('Error parsing time:', timeString, error);
+            return null;
+        }
+    }
+    // ========================================
+    // DATE & TIME CALCULATION SECTION
+    // ========================================
+    /**
+     * Create event date in Milwaukee timezone for today only
+     * Since dashboard already filters by day, we know the event is always today
+     */
+    function createEventDate(timeInfo) {
+        if (!timeInfo) return null;
+        try {
+            console.log('Creating event date for Milwaukee time:', timeInfo);
+            const today = new Date();
+            const milwaukeeToday = new Date(today.toLocaleString("en-US", {timeZone: "America/Chicago"}));
+            const eventDateTime = new Date(
+                milwaukeeToday.getFullYear(),
+                milwaukeeToday.getMonth(),
+                milwaukeeToday.getDate(),
+                timeInfo.hours,
+                timeInfo.minutes,
+                0,
+                0
+            );
+            // Since dashboard only shows today's programs, we always use today's date
+            console.log('Event date created for today:', eventDateTime.toLocaleString());
+            return eventDateTime;
+        } catch (error) {
+            console.error('Error creating event date:', error);
+            return null;
+        }
+    }
+    /**
+     * Get current time in Milwaukee timezone
+     */
+    function getCurrentMilwaukeeTime() {
+        const now = new Date();
+        const milwaukeeTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
+        console.log('Milwaukee time calculation - Raw now:', now.toLocaleString(), 'Milwaukee now:', milwaukeeTime.toLocaleString());
+        return milwaukeeTime;
+    }
+    /**
+     * Format time for display in user's local timezone
+     */
+    function formatTimeForUser(eventDate) {
+        if (!eventDate) return 'soon';
+        try {
+            const options = {
+                hour: 'numeric',
+                minute: '2-digit',
+                timeZoneName: 'short'
+            };
+            return eventDate.toLocaleString('en-US', options);
+        } catch (error) {
+            console.error('Error formatting time for user:', error);
+            return 'soon';
+        }
+    }
+    /**
+     * Get human-readable time difference that updates in real-time
+     */
+    function getTimeUntilText(minutesUntil) {
+        const absMinutes = Math.abs(minutesUntil);
+        if (absMinutes < 1) {
+            return "right now";
+        } else if (absMinutes < 60) {
+            const mins = Math.round(absMinutes);
+            return `${mins} minute${mins !== 1 ? 's' : ''}`;
+        } else {
+            const hours = Math.floor(absMinutes / 60);
+            const mins = Math.round(absMinutes % 60);
+            if (mins === 0) {
+                return `${hours} hour${hours !== 1 ? 's' : ''}`;
+            } else {
+                return `${hours} hour${hours !== 1 ? 's' : ''} and ${mins} minute${mins !== 1 ? 's' : ''}`;
+            }
+        }
+    }
+    /**
+     * Generate smart, contextual messages based on timing
+     * Since dashboard only shows today's programs, we only need "today" logic
+     */
+    function generateSmartMessage(eventDate, minutesUntilEvent, minutesSinceStarted) {
+        const userTimeDisplay = formatTimeForUser(eventDate);
+        const timeUntilText = getTimeUntilText(Math.abs(minutesUntilEvent));
+        const programName = decodeURIComponent(eventName || 'The program');
+        // Calculate when link will appear
+        const linkOpenTime = new Date(eventDate.getTime() - (CONFIG.MINUTES_BEFORE_EVENT * 60 * 1000));
+        const linkOpenUserTime = linkOpenTime.toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+            timeZoneName: 'short'
+        });
+        let message = '';
+        let note = '';
+        // SCENARIO 1: Event is happening right now or within session time
+        if (minutesUntilEvent <= 0 && minutesSinceStarted <= CONFIG.EVENT_DURATION_MINUTES) {
+            if (minutesSinceStarted <= 5) {
+                message = `${programName} is starting now!`;
+                note = "Join whenever you're ready.";
+            } else if (minutesSinceStarted <= 60) {
+                message = `${programName} started ${getTimeUntilText(minutesSinceStarted)} ago and is in progress.`;
+                note = "You can still join - late arrivals are welcome!";
+            } else {
+                // 1-2 hours after start
+                message = `${programName} started ${getTimeUntilText(minutesSinceStarted)} ago.`;
+                note = "The session may still be running, or you can join if you need to reconnect.";
+            }
+        }
+        // SCENARIO 2: Event is later today
+        else if (minutesUntilEvent > 0) {
+            if (minutesUntilEvent <= 120) {
+                // Within 2 hours
+                message = `${programName} starts in ${timeUntilText} at ${userTimeDisplay}.`;
+                if (minutesUntilEvent <= CONFIG.MINUTES_BEFORE_EVENT) {
+                    note = "The Zoom link is about to appear - you're perfectly on time!";
+                } else {
+                    const minutesUntilLink = minutesUntilEvent - CONFIG.MINUTES_BEFORE_EVENT;
+                    const linkWaitText = getTimeUntilText(minutesUntilLink);
+                    note = `The Zoom link will appear at ${linkOpenUserTime} (in ${linkWaitText}).`;
+                }
+            } else {
+                // More than 2 hours away
+                message = `${programName} is scheduled for later today at ${userTimeDisplay}.`;
+                note = `You're quite early! The link will open at ${linkOpenUserTime}.`;
+            }
+        }
+        // SCENARIO 3: Event ended today
+        else {
+            message = `${programName} is over for today.`;
+            note = "This session has concluded. Check your dashboard for other available programs today.";
+        }
+        return { message, note };
+    }
+    // ========================================
+    // UI STATE MANAGEMENT SECTION
+    // ========================================
+    /**
+     * READY STATE: Show zoom link
+     */
+    function showZoomLink() {
+        console.log('UI State: READY - Showing zoom link');
+        if (elements.header) elements.header.textContent = "We're Ready! Join Below";
+        if (elements.joinButton) elements.joinButton.style.display = 'flex';
+        if (elements.slider) elements.slider.style.display = 'none';
+        if (elements.zoomNote) elements.zoomNote.style.display = 'none';
+        if (elements.mainMessage) elements.mainMessage.style.display = 'none';
+        if (elements.subMessage) elements.subMessage.style.display = 'none';
+    }
+    /**
+     * WAITING STATE: Show waiting room with smart messaging
+     */
+    function showWaitingRoom(smartMessage) {
+        console.log('UI State: WAITING - Showing waiting room with smart message');
+        if (elements.header) elements.header.textContent = "Waiting Room";
+        if (elements.joinButton) elements.joinButton.style.display = 'none';
+        if (elements.slider) elements.slider.style.display = 'block';
+        if (elements.zoomNote) elements.zoomNote.style.display = 'block';
+        if (elements.mainMessage) elements.mainMessage.style.display = 'block';
+        if (elements.subMessage) elements.subMessage.style.display = 'block';
+        // Update with smart messaging
+        if (elements.mainMessage && smartMessage) {
+            elements.mainMessage.textContent = smartMessage.message;
+        }
+        // Update the note with contextual information - preserve existing structure
+        if (elements.subMessage && smartMessage) {
+            // Check if there's already a <strong> tag we can update
+            const strongTag = elements.subMessage.querySelector('strong');
+            if (strongTag) {
+                // Update existing structure
+                strongTag.textContent = 'INFO:';
+                // Update the text after the strong tag
+                const textNode = strongTag.nextSibling;
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    textNode.textContent = ' ' + smartMessage.note;
+                } else {
+                    // Append new text node
+                    elements.subMessage.appendChild(document.createTextNode(' ' + smartMessage.note));
+                }
+            } else {
+                // Fallback if no strong tag exists
+                elements.subMessage.innerHTML = `<strong>INFO:</strong> ${smartMessage.note}`;
+            }
+        }
+    }
+    // ========================================
+    // MAIN STATUS UPDATE LOGIC SECTION
+    // ========================================
+    /**
+     * Main function that determines what state to show with smart messaging
+     */
+    function updateStatus() {
+        try {
+            console.log('--- Status Update Check ---');
+            // CASE 1: No time provided - show link immediately
+            if (!eventTime || eventTime.trim() === '') {
+                console.log('No event time provided - showing link immediately');
+                showZoomLink();
+                return;
+            }
+            // CASE 2: Parse the event time
+            const timeInfo = parseEventTime(eventTime);
+            if (!timeInfo) {
+                console.warn('Could not parse event time, showing link immediately:', eventTime);
+                showZoomLink();
+                return;
+            }
+            // CASE 3: Create event date
+            const eventDate = createEventDate(timeInfo);
+            if (!eventDate) {
+                console.warn('Could not create event date, showing link immediately');
+                showZoomLink();
+                return;
+            }
+            // CASE 4: Calculate timing differences
+            const milwaukeeNow = getCurrentMilwaukeeTime();
+            const timeUntilEvent = eventDate - milwaukeeNow;
+            const minutesUntilEvent = timeUntilEvent / (60 * 1000);
+            const minutesSinceEventStarted = (milwaukeeNow - eventDate) / (60 * 1000);
+            // Generate smart contextual message
+            const smartMessage = generateSmartMessage(eventDate, minutesUntilEvent, minutesSinceEventStarted);
+            // DETAILED DEBUG LOGGING for troubleshooting
+            console.log('=== DETAILED TIMING DEBUG ===');
+            console.log('Raw eventTime from URL:', eventTime);
+            console.log('Parsed timeInfo:', timeInfo);
+            console.log('Created eventDate:', eventDate);
+            console.log('Current Milwaukee time:', milwaukeeNow);
+            console.log('Event date formatted:', eventDate.toLocaleString());
+            console.log('Milwaukee now formatted:', milwaukeeNow.toLocaleString());
+            console.log('timeUntilEvent (ms):', timeUntilEvent);
+            console.log('minutesUntilEvent:', minutesUntilEvent.toFixed(2));
+            console.log('minutesSinceEventStarted:', minutesSinceEventStarted.toFixed(2));
+            console.log('CONFIG.MINUTES_BEFORE_EVENT:', CONFIG.MINUTES_BEFORE_EVENT);
+            console.log('CONFIG.EVENT_DURATION_MINUTES:', CONFIG.EVENT_DURATION_MINUTES);
+            console.log('Smart message generated:', smartMessage);
+            console.log('=== END DEBUG ===');
+            // CASE 5: Decision logic for showing/hiding zoom link
+            if (minutesUntilEvent <= CONFIG.MINUTES_BEFORE_EVENT && timeUntilEvent > CONFIG.BUFFER_MS) {
+                // Show link X minutes before event
+                console.log('DECISION: Show link - within opening window (', minutesUntilEvent.toFixed(1), 'min until, within', CONFIG.MINUTES_BEFORE_EVENT, 'min window)');
+                showZoomLink();
+            } else if (minutesUntilEvent <= 0 && minutesSinceEventStarted <= CONFIG.EVENT_DURATION_MINUTES) {
+                // Event has started, keep link available for 2 hours after start
+                console.log('DECISION: Show link - event in progress (started', minutesSinceEventStarted.toFixed(1), 'min ago, within', CONFIG.EVENT_DURATION_MINUTES, 'min window)');
+                showZoomLink();
+            } else {
+                // Show waiting room with smart messaging that updates in real-time
+                console.log('DECISION: Show waiting room - outside active window (', minutesUntilEvent.toFixed(1), 'min until event,', minutesSinceEventStarted.toFixed(1), 'min since started)');
+                showWaitingRoom(smartMessage);
+            }
+        } catch (error) {
+            console.error('Error in updateStatus:', error);
+            // Fallback: show the link if there's any error
+            console.log('FALLBACK: Showing link due to error');
+            showZoomLink();
+        }
+    }
+    // ========================================
+    // INITIALIZATION SECTION
+    // ========================================
+    console.log('Initializing Enhanced Waiting Room Controller...');
+    console.log('Current actual time:', new Date().toLocaleString());
+    console.log('Current Milwaukee time:', getCurrentMilwaukeeTime().toLocaleString());
+    // Run initial status check
+    updateStatus();
+    // Set up automatic updates every 10 seconds
+    const updateInterval = setInterval(updateStatus, CONFIG.UPDATE_INTERVAL_MS);
+    console.log('Status updates scheduled every', CONFIG.UPDATE_INTERVAL_MS/1000, 'seconds');
+    // Clean up interval if page is unloaded
+    window.addEventListener('beforeunload', function() {
+        clearInterval(updateInterval);
+    });
+    console.log('Enhanced Waiting Room Controller initialized successfully!');
+});
+</script>
+<!--  ============================================================  -->
+<!--  END ENHANCED WAITING ROOM CONTROLLER                         -->
+<!--  ============================================================  -->
+{% endblock %}

@@ -1,0 +1,34 @@
+---
+pagination:
+  data: teams
+  size: 1
+  alias: member
+permalink: /team/{{ member.slug.current }}/
+layout: base.njk
+---
+{% set title = member.name + " - Rooted In Mindfulness" %}
+
+<div class="section background-white">
+  <div class="content-container">
+    <div class="team-member-profile">
+
+      {% if member.bioPicture %}
+      <div class="team-photo-block">
+        <img src="{{ member.bioPicture.asset.url }}" alt="{{ member.name }}" class="team-member-photo">
+      </div>
+      {% endif %}
+
+      <div class="team-member-info">
+        <h1 class="heading-9">{{ member.name }}</h1>
+        {% if member.title %}
+        <h2 class="heading-39">{{ member.title }}</h2>
+        {% endif %}
+
+        {% if member.bio %}
+        <div class="rich-text-block-19 w-richtext">{{ member.bio | ptToHtml | safe }}</div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>

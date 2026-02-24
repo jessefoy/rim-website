@@ -1,0 +1,88 @@
+---
+layout: base.njk
+title: "Handful of Leaves Glossary"
+---
+
+{% block content %}
+<div class="section-7-copy background-grey">
+  <div class="content-container">
+    <div class="div-block-113">
+      <h1 class="glossary-header">Handful of Leaves <br>Glossary</h1>
+      <div class="search-instructions"><strong>Search By: <br></strong>English<br>&#8205;<em>Pali</em> / <em>Sanskrit<br></em>Synonyms</div>
+      <div class="w-form">
+        <div class="search-and-magnifying-glass">
+          <input
+            type="text"
+            id="glossary-search"
+            placeholder="Search terms..."
+            class="glossary-search-box w-input"
+            maxlength="256"
+          >
+          <img loading="lazy" src="/images/noun-magnifying-glass-4536497-333333.svg" alt="" class="image-15">
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="collection-block">
+        <div id="glossary-list" role="list" class="w-dyn-items">
+          {% for term in glossary %}
+          <div class="glossary-item w-layout-grid glossary-terms-list-item" role="listitem"
+            data-name="{{ term.name | lower }}"
+            data-pali="{{ term.pali | lower }}"
+            data-synonyms="{{ term.synonyms | lower }}">
+            <div class="dashboard-list-name-and-date-container">
+              <div class="glossary-terms-container-div">
+                <div class="dashboard-title-container">
+                  <h1 class="event-name">{{ term.name }}</h1>
+                </div>
+                {% if term.pali or term.sanskrit %}
+                <div class="div-block-161">
+                  {% if term.pali %}
+                  <h1 class="pali-sankrit">{{ term.pali }}</h1>
+                  {% endif %}
+                  {% if term.pali and term.sanskrit %}
+                  <h1 class="pali-sankrit">/</h1>
+                  {% endif %}
+                  {% if term.sanskrit %}
+                  <h1 class="pali-sankrit">{{ term.sanskrit }}</h1>
+                  {% endif %}
+                </div>
+                {% endif %}
+                {% if term.synonyms %}
+                <div class="dashboard-date-time-container">
+                  <div class="synonyms">{{ term.synonyms }}</div>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="program-links">
+              <div class="program-links">
+                <a href="/glossary/{{ term.slug.current }}" class="link-14">Definition</a>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="w-dyn-empty">
+            <div>No items found.</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('glossary-search').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.glossary-item').forEach(function(el) {
+    const matches = el.dataset.name.includes(q) ||
+                    (el.dataset.pali && el.dataset.pali.includes(q)) ||
+                    (el.dataset.synonyms && el.dataset.synonyms.includes(q));
+    el.style.display = matches ? '' : 'none';
+  });
+});
+</script>
+{% endblock %}

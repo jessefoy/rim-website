@@ -1,0 +1,42 @@
+---
+pagination:
+  data: courses
+  size: 1
+  alias: course
+permalink: /course/{{ course.slug.current }}/
+layout: base.njk
+---
+{% set title = course.name + " - Rooted In Mindfulness" %}
+
+<div class="section background-white">
+  <div class="content-container">
+
+    <h1 class="heading-9">{{ course.name }}</h1>
+    {% if course.subheading %}<h2 class="heading-39">{{ course.subheading }}</h2>{% endif %}
+
+    {% if course.mainContentDescription %}
+    <div class="rich-text-block-19 w-richtext">{{ course.mainContentDescription | ptToHtml | safe }}</div>
+    {% endif %}
+
+    {% if course.lessons and course.lessons.length > 0 %}
+    <div class="course-lessons-list">
+      <h3 class="details-header">Lessons</h3>
+      {% for lesson in course.lessons %}
+        {% if lesson.isSectionTitle %}
+        <div class="lesson-section-header">
+          <h3>{{ lesson.lessonTitleDisplayed }}</h3>
+        </div>
+        {% else %}
+        <div class="course-lesson-item">
+          <a href="/lessons/{{ lesson.slug.current }}" class="course-lesson-link">
+            {{ lesson.lessonTitleDisplayed }}
+            {% if lesson.includesAudio %}<span class="audio-badge">🎧</span>{% endif %}
+          </a>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
