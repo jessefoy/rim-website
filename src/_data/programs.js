@@ -12,6 +12,7 @@ module.exports = async function () {
       dateText,
       timeText,
       locationText,
+      locationLink,
       danaText,
       sortOrder,
       dashboardSpecialAnnouncement,
@@ -20,6 +21,12 @@ module.exports = async function () {
       filloutRegistrationFormId,
       zoomLink,
       zoomLinkText,
+      quote,
+      quoteSource,
+      programDescription,
+      specialNotes,
+      signedOutInstructions,
+      signedInInstructions,
       programCategory-> {
         name,
         slug
