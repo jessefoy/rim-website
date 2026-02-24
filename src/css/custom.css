@@ -112,21 +112,48 @@
 
 
 /* ═══════════════════════════════════════════════════
-   FOOTER — LAYOUT + NEWSLETTER COLUMN
-   Newsletter lives inside the dark blue footer.
-   Links left-aligned. Flodesk gets site fonts.
+   FOOTER — 3-COLUMN LAYOUT
+   Desktop: logo+contact | explore links | newsletter
+   Mobile:  newsletter → contact → explore links
+   Webflow's .footer-links-column replaced by two
+   direct siblings (.footer-col-explore / -newsletter).
 ═══════════════════════════════════════════════════ */
 
-/* Stack logo + address + contact vertically */
+/* Desktop: top-align all three columns */
+.footer-top-row {
+  align-items: flex-start !important;
+}
+
+/* Column 1 — Logo + contact: reset webflow's mobile order:1 */
 .footer-logo-column {
+  order: 0 !important;
+  width: 30% !important;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Left-align links in all footer columns */
-.footer-links-column-child {
-  align-items: flex-start !important;
+/* Column 2 — Explore links */
+.footer-col-explore {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* Column 3 — Newsletter */
+.footer-col-newsletter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile: newsletter → contact → explore */
+@media screen and (max-width: 767px) {
+  .footer-col-newsletter { order: 1; width: 100%; }
+  .footer-logo-column    { order: 2 !important; width: 100% !important; }
+  .footer-col-explore    { order: 3; width: 100%; }
 }
 
 /* Apply site fonts to the inline Flodesk form */
