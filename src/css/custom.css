@@ -72,6 +72,31 @@
   }
 }
 
+/* ═══════════════════════════════════════════════════
+   ACTIVE / CURRENT PAGE INDICATORS
+   Webflow sets w--current on matching links; these styles
+   make the active state visually clear.
+═══════════════════════════════════════════════════ */
+
+/* Top-level nav link active state */
+.navigation-link.w--current {
+  color: #39607a !important; /* RIM green */
+  border-bottom: 2px solid #39607a;
+  padding-bottom: 2px;
+}
+
+/* Dropdown link active state */
+.dropdown-link.w--current .dropdown-title {
+  color: #39607a;
+}
+
+/* Mobile nav link active state */
+.mobile-nav-link.w--current {
+  color: #39607a !important;
+  font-weight: 600;
+}
+
+
 /* Mobile: when hamburger is open, show the nav menu */
 .w-nav-menu.w--open {
   display: block !important;

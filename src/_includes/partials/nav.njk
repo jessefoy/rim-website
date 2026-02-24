@@ -1,85 +1,27 @@
-<!-- Desktop Nav -->
+<!-- ═══════════════════════════════════════════════════
+     DESKTOP NAV
+     memberArea: true  → member area layout (My Member Area brand, Member Links, Sign Out)
+     memberArea: unset → public layout (Programs, Get Involved, Member Area dropdown)
+     Login state handled by Memberstack data-ms-content / data-ms-member attributes.
+═══════════════════════════════════════════════════ -->
 <div data-collapse="small" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
   <div class="navigation-container">
+
+    <!-- Brand -->
     <div class="navigation-left">
-
-      <!-- Logged-out brand -->
-      <a data-ms-content="!members" href="/" class="brand-3 w-nav-brand">
+      <a href="/" class="brand-3 w-nav-brand">
         <img src="/images/Rooted-In-Mindfulness-Logo.png" alt="Rooted In Mindfulness" height="45" class="flowbase-logo">
-        <h1 class="heading-8">Rooted In Mindfulness</h1>
+        <h1 class="heading-8">{% if memberArea %}My Member Area{% else %}Rooted In Mindfulness{% endif %}</h1>
       </a>
-
-      <!-- Logged-in brand -->
-      <a data-ms-content="members" href="/" class="brand-3 w-nav-brand">
-        <img src="/images/Rooted-In-Mindfulness-Logo.png" alt="Rooted In Mindfulness" height="45" class="flowbase-logo">
-        <h1 class="heading-8">My Member Area</h1>
-      </a>
-
     </div>
+
     <div class="navigation-right">
       <nav role="navigation" class="nav-menu-2 w-nav-menu">
 
-        <!-- ── Logged-out nav ───────────────────────── -->
-        <a data-ms-content="!members" href="/community-programs" class="navigation-link w-nav-link">Programs</a>
+        {% if memberArea %}
+        <!-- ── Member area pages ─────────────────────────────── -->
 
-        <!-- Get Involved dropdown (logged out) -->
-        <div data-ms-content="!members" data-hover="true" data-delay="0" class="dropdown w-dropdown">
-          <div class="dropdown-toggle w-dropdown-toggle">
-            <div class="icon-4 w-icon-dropdown-toggle"></div>
-            <div class="text-block-14"><span class="text-span-24">Get Involved</span></div>
-          </div>
-          <nav class="navigation-dropdown w-dropdown-list">
-            <div class="dropdown-pointer">
-              <div class="dropdown-wrapper">
-                <a href="/volunteerism/volunteer" class="dropdown-link w-inline-block">
-                  <div class="nav-content-wrap">
-                    <div class="dropdown-title">Volunteer</div>
-                    <div class="nav-link-details">Help Co-Create Refuge at RIM</div>
-                  </div>
-                </a>
-                <a href="/kalyana-mitta/community-groups-events" class="dropdown-link w-inline-block">
-                  <div class="nav-content-wrap">
-                    <div class="dropdown-title">Start a Community Group</div>
-                    <div class="nav-link-details">Create a Community Group or Event</div>
-                  </div>
-                </a>
-              </div>
-              <div class="pointer"></div>
-            </div>
-          </nav>
-        </div>
-
-        <!-- Member Area dropdown (logged out only) -->
-        <div data-ms-content="!members" data-hover="true" data-delay="0" class="dropdown w-dropdown">
-          <div class="dropdown-toggle w-dropdown-toggle">
-            <div class="icon-4 w-icon-dropdown-toggle"></div>
-            <div class="text-block-14"><span class="text-span-8">Member Area</span></div>
-          </div>
-          <nav class="navigation-dropdown w-dropdown-list">
-            <div class="dropdown-pointer">
-              <div class="dropdown-wrapper">
-                <a href="/login" class="dropdown-link w-inline-block">
-                  <div class="nav-content-wrap">
-                    <div class="dropdown-title">Login</div>
-                    <div class="nav-link-details">Access Community Resources</div>
-                  </div>
-                </a>
-                <a href="/community-membership" class="dropdown-link w-inline-block">
-                  <div class="nav-content-wrap">
-                    <div class="dropdown-title">Join Us</div>
-                    <div class="nav-link-details">Create a RIM Member Account</div>
-                  </div>
-                </a>
-              </div>
-              <div class="pointer"></div>
-            </div>
-          </nav>
-        </div>
-
-        <!-- ── Logged-in nav ────────────────────────── -->
-
-        <!-- Member Links dropdown (logged in only) -->
-        <div data-ms-content="members" data-hover="true" data-delay="0" class="dropdown w-dropdown">
+        <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
           <div class="dropdown-toggle w-dropdown-toggle">
             <div class="icon-4 w-icon-dropdown-toggle"></div>
             <div class="text-block-14"><span class="text-span-24">Member Links</span></div>
@@ -87,25 +29,25 @@
           <nav class="navigation-dropdown w-dropdown-list">
             <div class="dropdown-pointer">
               <div class="dropdown-wrapper">
-                <a href="/account/dashboard" class="dropdown-link w-inline-block">
+                <a href="/account/dashboard" class="dropdown-link w-inline-block{% if page.url == '/account/dashboard/' %} w--current{% endif %}">
                   <div class="nav-content-wrap">
                     <div class="dropdown-title">Today's Zoom Links</div>
                     <div class="nav-link-details">Join Today's Sessions</div>
                   </div>
                 </a>
-                <a href="/account/dashboard-my-library" class="dropdown-link w-inline-block">
+                <a href="/account/dashboard-my-library" class="dropdown-link w-inline-block{% if page.url == '/account/dashboard-my-library/' %} w--current{% endif %}">
                   <div class="nav-content-wrap">
                     <div class="dropdown-title">My Library</div>
                     <div class="nav-link-details">Courses, Recordings &amp; Resources</div>
                   </div>
                 </a>
-                <a href="/account/dashboard-member-care-agreements" class="dropdown-link w-inline-block">
+                <a href="/account/dashboard-member-care-agreements" class="dropdown-link w-inline-block{% if page.url == '/account/dashboard-member-care-agreements/' %} w--current{% endif %}">
                   <div class="nav-content-wrap">
                     <div class="dropdown-title">Member Care Agreements</div>
                     <div class="nav-link-details">Our Community Agreements</div>
                   </div>
                 </a>
-                <a href="/account/dashboard-my-profile" class="dropdown-link w-inline-block">
+                <a href="/account/dashboard-my-profile" class="dropdown-link w-inline-block{% if page.url == '/account/dashboard-my-profile/' %} w--current{% endif %}">
                   <div class="nav-content-wrap">
                     <div class="dropdown-title">Update My Profile</div>
                     <div class="nav-link-details">Manage Your Account</div>
@@ -123,8 +65,90 @@
           </nav>
         </div>
 
-        <!-- Sign Out link (logged in only) -->
-        <a data-ms-content="members" data-ms-action="logout" href="#/ms/logout" class="navigation-link w-nav-link">Sign Out</a>
+        <a data-ms-action="logout" href="#/ms/logout" class="navigation-link w-nav-link">Sign Out</a>
+
+        {% else %}
+        <!-- ── Public pages ──────────────────────────────────── -->
+
+        <a href="/community-programs" class="navigation-link w-nav-link{% if page.url.startsWith('/community-programs') %} w--current{% endif %}">Programs</a>
+
+        <!-- Get Involved dropdown -->
+        <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+          <div class="dropdown-toggle w-dropdown-toggle">
+            <div class="icon-4 w-icon-dropdown-toggle"></div>
+            <div class="text-block-14"><span class="text-span-24">Get Involved</span></div>
+          </div>
+          <nav class="navigation-dropdown w-dropdown-list">
+            <div class="dropdown-pointer">
+              <div class="dropdown-wrapper">
+                <a href="/volunteerism/volunteer" class="dropdown-link w-inline-block{% if page.url.startsWith('/volunteerism') %} w--current{% endif %}">
+                  <div class="nav-content-wrap">
+                    <div class="dropdown-title">Volunteer</div>
+                    <div class="nav-link-details">Help Co-Create Refuge at RIM</div>
+                  </div>
+                </a>
+                <a href="/kalyana-mitta/community-groups-events" class="dropdown-link w-inline-block{% if page.url.startsWith('/kalyana-mitta') %} w--current{% endif %}">
+                  <div class="nav-content-wrap">
+                    <div class="dropdown-title">Start a Community Group</div>
+                    <div class="nav-link-details">Create a Community Group or Event</div>
+                  </div>
+                </a>
+              </div>
+              <div class="pointer"></div>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Member Area dropdown
+             Label changes based on login state (Memberstack handles visibility).
+             data-ms-member="first-name" injects the member's name client-side. -->
+        <div data-hover="true" data-delay="0" class="dropdown w-dropdown">
+          <div class="dropdown-toggle w-dropdown-toggle">
+            <div class="icon-4 w-icon-dropdown-toggle"></div>
+            <div class="text-block-14">
+              <span data-ms-content="!members" class="text-span-8">Member Area</span>
+              <span data-ms-content="members" class="text-span-8">Hi, <span data-ms-member="first-name"></span></span>
+            </div>
+          </div>
+          <nav class="navigation-dropdown w-dropdown-list">
+            <div class="dropdown-pointer">
+              <div class="dropdown-wrapper">
+
+                <!-- Logged-out links -->
+                <a data-ms-content="!members" href="/login" class="dropdown-link w-inline-block">
+                  <div class="nav-content-wrap">
+                    <div class="dropdown-title">Login</div>
+                    <div class="nav-link-details">Access Community Resources</div>
+                  </div>
+                </a>
+                <a data-ms-content="!members" href="/community-membership" class="dropdown-link w-inline-block">
+                  <div class="nav-content-wrap">
+                    <div class="dropdown-title">Join Us</div>
+                    <div class="nav-link-details">Create a RIM Member Account</div>
+                  </div>
+                </a>
+
+                <!-- Logged-in links -->
+                <a data-ms-content="members" href="/account/dashboard" class="dropdown-link w-inline-block">
+                  <div class="nav-content-wrap">
+                    <div class="dropdown-title">My Dashboard</div>
+                    <div class="nav-link-details">Today's Sessions &amp; Member Resources</div>
+                  </div>
+                </a>
+                <a data-ms-content="members" data-ms-action="logout" href="#/ms/logout" class="dropdown-link w-inline-block">
+                  <div class="nav-content-wrap">
+                    <div class="dropdown-title">Sign Out</div>
+                    <div class="nav-link-details">Log out of your account</div>
+                  </div>
+                </a>
+
+              </div>
+              <div class="pointer"></div>
+            </div>
+          </nav>
+        </div>
+
+        {% endif %}
 
       </nav>
 
@@ -132,45 +156,50 @@
         <a href="/donate" class="button-menu w-button">DONATE</a>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- Mobile Nav -->
+
+<!-- ═══════════════════════════════════════════════════
+     MOBILE NAV
+     Single w-nav-menu per nav block — fixes hamburger toggle bug
+     (nav.js uses querySelector which only finds the first element).
+     data-ms-content on individual items handles login-state visibility.
+═══════════════════════════════════════════════════ -->
 <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease-out" data-easing2="ease-out" role="banner" class="navigation-mob w-nav">
   <div class="navigation-container-mob">
 
-    <!-- Logged-out mobile brand -->
-    <a data-ms-content="!members" href="/" class="brand-4 w-nav-brand">
+    <a href="/" class="brand-4 w-nav-brand">
       <img src="/images/Rooted-In-Mindfulness-Logo.png" alt="Rooted In Mindfulness" class="flowbase-logo">
-      <h1 class="heading-8">Rooted In Mindfulness</h1>
+      <h1 class="heading-8">{% if memberArea %}My Member Area{% else %}Rooted In Mindfulness{% endif %}</h1>
     </a>
 
-    <!-- Logged-in mobile brand -->
-    <a data-ms-content="members" href="/" class="brand-4 w-nav-brand">
-      <img src="/images/Rooted-In-Mindfulness-Logo.png" alt="Rooted In Mindfulness" class="flowbase-logo">
-      <h1 class="heading-8">My Member Area</h1>
-    </a>
-
-    <!-- Logged-out mobile menu -->
-    <nav data-ms-content="!members" role="navigation" class="mobile-nav w-nav-menu">
-      <a href="/login" class="mobile-nav-link w-nav-link">Login</a>
-      <a href="/community-programs" class="mobile-nav-link w-nav-link">Programs</a>
-      <a href="/volunteerism/volunteer" class="mobile-nav-link w-nav-link">Volunteer Opportunities</a>
-      <a href="/kalyana-mitta/community-groups-events" class="mobile-nav-link w-nav-link">Start A Community Group</a>
-      <a href="/community-membership" class="mobile-nav-link w-nav-link">Join RIM</a>
-      <a href="/donate" class="mobile-nav-link donate-nav-link w-nav-link">Donate Today</a>
-    </nav>
-
-    <!-- Logged-in mobile menu -->
-    <nav data-ms-content="members" role="navigation" class="mobile-nav w-nav-menu">
-      <a href="/account/dashboard" class="mobile-nav-link w-nav-link">Today's Zoom Links</a>
-      <a href="/account/dashboard-my-library" class="mobile-nav-link w-nav-link">My Library</a>
-      <a href="/account/dashboard-member-care-agreements" class="mobile-nav-link w-nav-link">Community Care Agreements</a>
-      <a href="/account/dashboard-my-profile" class="mobile-nav-link w-nav-link">Update My Profile</a>
+    {% if memberArea %}
+    <!-- Member area mobile menu -->
+    <nav role="navigation" class="mobile-nav w-nav-menu">
+      <a href="/account/dashboard" class="mobile-nav-link w-nav-link{% if page.url == '/account/dashboard/' %} w--current{% endif %}">Today's Zoom Links</a>
+      <a href="/account/dashboard-my-library" class="mobile-nav-link w-nav-link{% if page.url == '/account/dashboard-my-library/' %} w--current{% endif %}">My Library</a>
+      <a href="/account/dashboard-member-care-agreements" class="mobile-nav-link w-nav-link{% if page.url == '/account/dashboard-member-care-agreements/' %} w--current{% endif %}">Community Care Agreements</a>
+      <a href="/account/dashboard-my-profile" class="mobile-nav-link w-nav-link{% if page.url == '/account/dashboard-my-profile/' %} w--current{% endif %}">Update My Profile</a>
       <a href="/community-programs" class="mobile-nav-link w-nav-link">Programs</a>
       <a href="#/ms/logout" data-ms-action="logout" class="mobile-nav-link w-nav-link">Sign Out</a>
       <a href="/donate" class="mobile-nav-link donate-nav-link w-nav-link">Donate Today</a>
     </nav>
+
+    {% else %}
+    <!-- Public mobile menu — single menu, data-ms-content on individual items -->
+    <nav role="navigation" class="mobile-nav w-nav-menu">
+      <a data-ms-content="!members" href="/login" class="mobile-nav-link w-nav-link">Login</a>
+      <a href="/community-programs" class="mobile-nav-link w-nav-link{% if page.url.startsWith('/community-programs') %} w--current{% endif %}">Programs</a>
+      <a href="/volunteerism/volunteer" class="mobile-nav-link w-nav-link{% if page.url.startsWith('/volunteerism') %} w--current{% endif %}">Volunteer Opportunities</a>
+      <a href="/kalyana-mitta/community-groups-events" class="mobile-nav-link w-nav-link{% if page.url.startsWith('/kalyana-mitta') %} w--current{% endif %}">Start A Community Group</a>
+      <a data-ms-content="!members" href="/community-membership" class="mobile-nav-link w-nav-link">Join RIM</a>
+      <a data-ms-content="members" href="/account/dashboard" class="mobile-nav-link w-nav-link">My Dashboard</a>
+      <a data-ms-content="members" href="#/ms/logout" data-ms-action="logout" class="mobile-nav-link w-nav-link">Sign Out</a>
+      <a href="/donate" class="mobile-nav-link donate-nav-link w-nav-link">Donate Today</a>
+    </nav>
+    {% endif %}
 
     <div class="menu-mob w-nav-button">
       <div class="icon-5 w-icon-nav-menu"></div>
