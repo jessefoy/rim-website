@@ -1,20 +1,22 @@
-{% if not memberArea %}
-<div class="footer-newsletter">
-  <div class="footer-newsletter-inner">
-    <h3 class="footer-newsletter-heading">Stay Connected</h3>
-    <p class="footer-newsletter-text">Sign up for the RIM Newsletter — programs, events, new library content, and community news.</p>
-    <div id="fd-form-6445bc34c8b890f50782ba90"></div>
-  </div>
-</div>
-{% endif %}
-
 <div class="footer">
   <div class="container-7">
     <div class="footer-top-row">
+
+      <!-- Column 1: Brand + Contact -->
       <div class="footer-logo-column">
         <img src="/images/RIM-Website-Footer-Logo-White.png" height="" alt="Rooted In Mindfulness" width="75" class="footer-logo">
+        <div class="footer-address">Rooted In Mindfulness<br>4040 N. Calhoun Rd.<br>Brookfield, WI, 53005</div>
+        <div class="footer-links-phone-email">
+          <div class="footer-telephone">
+            <a href="tel:4148828932" class="link">(414) 882-8932</a>
+          </div>
+          <a href="mailto:support@rootedinmindfulness.org?subject=Dear%20RIM%20Support" class="footer-link-email">support@rootedinmindfulness.org</a>
+        </div>
       </div>
+
       <div class="footer-links-column">
+
+        <!-- Column 2: Explore links -->
         <div class="footer-links-column-child">
           <div class="footer-links-header">Explore</div>
           <a href="/community-programs" class="footer-links-main">Programs</a>
@@ -23,17 +25,19 @@
           <a href="/community-membership" class="footer-links-main">Join RIM</a>
           <a href="/kalyana-mitta/community-groups-events" class="footer-links-main">Community Groups</a>
         </div>
+
+        <!-- Column 3: Newsletter (public pages only) -->
+        {% if not memberArea %}
         <div class="footer-links-column-child">
-          <div class="footer-address">Rooted In Mindfulness<br>4040 N. Calhoun Rd.<br>Brookfield, WI, 53005</div>
-          <div class="footer-links-phone-email">
-            <div class="footer-telephone">
-              <a href="tel:4148828932" class="link">(414) 882-8932</a>
-            </div>
-            <a href="mailto:support@rootedinmindfulness.org?subject=Dear%20RIM%20Support" class="footer-link-email">support@rootedinmindfulness.org</a>
-          </div>
+          <div class="footer-links-header">Stay Connected</div>
+          <p class="footer-newsletter-sub">Sign up for programs, events, and community news.</p>
+          <div id="fd-form-6445bc34c8b890f50782ba90"></div>
         </div>
+        {% endif %}
+
       </div>
     </div>
+
     <div class="footer-bottom-row">
       <div class="small-text-2">©2020 Rooted In Mindfulness | 501(c)(3) Non-Profit | <a href="/donate" target="_blank" class="link-3">Donate</a></div>
       <div class="small-text-2">Powered by Kind People :) <a href="/volunteerism/volunteer" class="link-2">Volunteer</a></div>
