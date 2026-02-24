@@ -47,3 +47,40 @@
     margin-top: 0;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════
+   NAVIGATION DROPDOWNS
+   Webflow JS normally adds w--open on hover/click.
+   CSS hover covers desktop; nav.js handles click +
+   the mobile hamburger toggle.
+═══════════════════════════════════════════════════ */
+
+/* Desktop (>767px): open dropdown on hover */
+@media screen and (min-width: 768px) {
+  .w-dropdown:hover > .w-dropdown-list {
+    display: block;
+  }
+
+  /* Apply the w--open visual styles when shown via hover */
+  .w-dropdown:hover > .navigation-dropdown {
+    background-color: transparent;
+    min-width: 360px;
+    max-height: 100vh;
+    padding-top: 10px;
+    left: -100px;
+  }
+}
+
+/* Mobile: when hamburger is open, show the nav menu */
+.w-nav-menu.w--open {
+  display: block !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 999;
+  padding: 10px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
