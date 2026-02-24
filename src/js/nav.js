@@ -1,26 +1,14 @@
 /**
  * nav.js — RIM Website navigation
  *
- * webflow.js (loaded before this file) registers its own click handlers on
- * .w-nav-button and .w-dropdown-toggle. We strip those by cloning the elements
- * before adding our own handlers — this eliminates the double-handler conflict
- * that caused the mobile menu to flash open and immediately close.
+ * Loaded BEFORE webflow.js (see base.njk) so our DOMContentLoaded handlers
+ * register first. stopImmediatePropagation on hamburger and dropdown clicks
+ * prevents webflow.js from double-handling those same events.
  */
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ── Strip webflow.js handlers ────────────────────────────────
-  // cloneNode(true) deep-copies the element and its children but NOT its
-  // event listeners. Replacing the original removes webflow's handlers.
-
-  document.querySelectorAll('.w-nav-button, .w-dropdown-toggle').forEach(function (el) {
-    var clone = el.cloneNode(true);
-    el.parentNode.replaceChild(clone, el);
-  });
-
-
   // ── Desktop dropdowns ────────────────────────────────────────
-  // CSS handles hover (custom.css). JS handles click and closes on outside click.
-  // Must query AFTER the clone-replace above so we get the fresh elements.
+  // CSS handles hover (custom.css). JS handles click + outside-close.
 
   document.querySelectorAll('.w-dropdown').forEach(function (dropdown) {
     var toggle = dropdown.querySelector('.w-dropdown-toggle');
@@ -28,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!toggle || !list) return;
 
     toggle.addEventListener('click', function (e) {
-      e.stopPropagation(); // prevent document click from closing immediately
+      e.stopImmediatePropagation(); // prevents webflow.js handler from also firing
+      e.stopPropagation();
       var isOpen = dropdown.classList.contains('w--open');
 
       closeAllDropdowns();
@@ -43,11 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // ── Mobile hamburger ─────────────────────────────────────────
-  // Must query AFTER the clone-replace above.
 
   document.querySelectorAll('.w-nav-button').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
-      e.stopPropagation(); // prevent document click from closing immediately
+      e.stopImmediatePropagation(); // prevents webflow.js handler from also firing
+      e.stopPropagation();          // prevents document close handler from firing
       var nav  = this.closest('.w-nav');
       var menu = nav ? nav.querySelector('.w-nav-menu') : null;
       if (!menu) return;
@@ -68,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // ── Global close handlers ────────────────────────────────────
+  // These only fire for clicks that were NOT stopPropagated above.
 
-  // Click anywhere outside the nav closes everything
   document.addEventListener('click', function (e) {
     closeAllDropdowns();
     if (!e.target.closest('.w-nav')) {
@@ -77,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Escape key closes everything
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       closeAllDropdowns();
