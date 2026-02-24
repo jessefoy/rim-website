@@ -149,11 +149,30 @@
   flex-direction: column;
 }
 
-/* Mobile: newsletter → contact → explore */
+/* Mobile: force column stack + reorder newsletter → contact → explore */
 @media screen and (max-width: 767px) {
-  .footer-col-newsletter { order: 1; width: 100%; }
-  .footer-logo-column    { order: 2 !important; width: 100% !important; }
-  .footer-col-explore    { order: 3; width: 100%; }
+  .footer-top-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 28px;
+  }
+
+  .footer-col-newsletter {
+    order: 1;
+    width: 100% !important;
+  }
+
+  .footer-logo-column {
+    order: 2 !important;
+    width: 100% !important;
+  }
+
+  .footer-col-explore {
+    order: 3;
+    width: 100% !important;
+    align-items: center !important;
+  }
 }
 
 /* Apply site fonts to the inline Flodesk form */
