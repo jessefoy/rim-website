@@ -15,15 +15,21 @@ title: "Community Meditation and Mindfulness Programs"
   <div class="content-container">
 
     {% for category in programCategories %}
-    <div class="program_category_container">
-      <div class="program-list-header">
-        <h1 class="program-category-header">{{ category.name }}</h1>
-      </div>
-
+      {# Pre-check: only render category if it has at least one program #}
       {% set hasPrograms = false %}
       {% for program in programs %}
         {% if program.programCategory and program.programCategory.name == category.name %}
           {% set hasPrograms = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if hasPrograms %}
+      <div class="program_category_container">
+        <div class="program-list-header">
+          <h1 class="program-category-header">{{ category.name }}</h1>
+        </div>
+        {% for program in programs %}
+          {% if program.programCategory and program.programCategory.name == category.name %}
           <div class="w-layout-grid programlistblock">
             <div class="dashboard-list-name-and-date-container">
               <div class="name-day-and-time-block">
@@ -46,13 +52,10 @@ title: "Community Meditation and Mindfulness Programs"
               <a href="/programs/{{ program.slug.current }}" class="program-list-button w-button">Learn More</a>
             </div>
           </div>
-        {% endif %}
-      {% endfor %}
-
-      {% if not hasPrograms %}
-      <div class="w-dyn-empty"><div>No programs found.</div></div>
+          {% endif %}
+        {% endfor %}
+      </div>
       {% endif %}
-    </div>
     {% endfor %}
 
   </div>
