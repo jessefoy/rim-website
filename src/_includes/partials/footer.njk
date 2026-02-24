@@ -1,41 +1,32 @@
 <footer class="rim-footer">
   <div class="rim-footer-inner">
 
-    <!-- Newsletter — first in DOM = first on mobile -->
     {% if not memberArea %}
-    <div class="rim-footer-col rim-footer-newsletter">
-      <div class="rim-footer-heading">Stay Connected</div>
+    <div class="rim-footer-newsletter">
+      <h3 class="rim-footer-heading">Stay Connected</h3>
+      <p class="rim-footer-sub">Sign up for programs, events, and community news.</p>
       <form class="footer-subscribe-form" id="footer-subscribe-form" novalidate>
-        <input type="text"  name="first_name" placeholder="First name"    class="footer-input">
-        <input type="email" name="email"      placeholder="Email address" class="footer-input" required>
-        <button type="submit" class="footer-subscribe-btn">Subscribe</button>
+        <div class="footer-subscribe-row">
+          <input type="text"  name="first_name" placeholder="First name"    class="footer-input">
+          <input type="email" name="email"      placeholder="Email address" class="footer-input" required>
+          <button type="submit" class="footer-subscribe-btn">Subscribe</button>
+        </div>
         <p class="footer-subscribe-msg" id="footer-subscribe-msg" hidden></p>
       </form>
     </div>
+
+    <div class="rim-footer-divider"></div>
     {% endif %}
 
-    <!-- Contact -->
-    <div class="rim-footer-col rim-footer-contact">
+    <div class="rim-footer-contact">
       <img src="/images/RIM-Website-Footer-Logo-White.png" alt="Rooted In Mindfulness" width="65" class="rim-footer-logo">
-      <div class="rim-footer-address">
-        Rooted In Mindfulness<br>
-        4040 N. Calhoun Rd.<br>
-        Brookfield, WI, 53005
-      </div>
+      <div class="rim-footer-name">Rooted In Mindfulness</div>
+      <div class="rim-footer-address">4040 N. Calhoun Rd., Brookfield, WI 53005</div>
       <div class="rim-footer-contact-links">
         <a href="tel:4148828932">(414) 882-8932</a>
+        <span class="rim-footer-dot">·</span>
         <a href="mailto:support@rootedinmindfulness.org?subject=Dear%20RIM%20Support">support@rootedinmindfulness.org</a>
       </div>
-    </div>
-
-    <!-- Explore links -->
-    <div class="rim-footer-col rim-footer-links">
-      <div class="rim-footer-heading">Explore</div>
-      <a href="/community-programs">Programs</a>
-      <a href="/donate">Donate</a>
-      <a href="/volunteerism/volunteer">Volunteer</a>
-      <a href="/community-membership">Join RIM</a>
-      <a href="/kalyana-mitta/community-groups-events">Community Groups</a>
     </div>
 
   </div>
@@ -78,7 +69,7 @@
       var data = await res.json();
 
       if (res.ok) {
-        form.innerHTML = '<p class="footer-subscribe-msg footer-subscribe-success">Thank you! You\'re on the list. 🙏</p>';
+        form.innerHTML = '<p class="footer-subscribe-success">Thank you! You\'re on the list. 🙏</p>';
       } else {
         msg.textContent = data.error || 'Something went wrong. Please try again.';
         msg.hidden = false;
