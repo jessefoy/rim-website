@@ -113,28 +113,30 @@
 
 /* ═══════════════════════════════════════════════════
    FOOTER — 3-COLUMN LAYOUT
-   Desktop: logo+contact | explore links | newsletter
-   Mobile:  newsletter → contact → explore links
-   Webflow's .footer-links-column replaced by two
-   direct siblings (.footer-col-explore / -newsletter).
+   HTML order: newsletter | logo+contact | explore
+   Desktop: flex row, reordered via CSS order property
+            → logo+contact | explore | newsletter
+   Mobile:  display:block so columns stack in HTML order
+            → newsletter → logo+contact → explore
+   Using block (not flex) on mobile avoids the async
+   Flodesk render causing flex items to overlap.
 ═══════════════════════════════════════════════════ */
 
-/* Desktop: top-align all three columns */
+/* Desktop: flex row, top-aligned */
 .footer-top-row {
   align-items: flex-start !important;
 }
 
-/* Column 1 — Logo + contact: reset webflow's mobile order:1 */
 .footer-logo-column {
-  order: 0 !important;
+  order: 1;
   width: 30% !important;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Column 2 — Explore links */
 .footer-col-explore {
+  order: 2;
   width: 22%;
   display: flex;
   flex-direction: column;
@@ -142,36 +144,24 @@
   gap: 4px;
 }
 
-/* Column 3 — Newsletter */
 .footer-col-newsletter {
+  order: 3;
   flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Mobile: force column stack + reorder newsletter → contact → explore */
+/* Mobile: plain block stacking — no flex, no order, no overlap */
 @media screen and (max-width: 767px) {
   .footer-top-row {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 28px;
+    display: block !important;
   }
 
-  .footer-col-newsletter {
-    order: 1;
-    width: 100% !important;
-  }
-
-  .footer-logo-column {
-    order: 2 !important;
-    width: 100% !important;
-  }
-
+  .footer-col-newsletter,
+  .footer-logo-column,
   .footer-col-explore {
-    order: 3;
+    display: block !important;
     width: 100% !important;
-    align-items: center !important;
+    position: static !important;
+    margin-bottom: 32px;
   }
 }
 
