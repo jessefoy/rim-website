@@ -1,0 +1,11 @@
+/*
+  custom.css — Site-specific overrides for RIM website
+  Loaded after Webflow CSS to take precedence.
+  Do not modify normalize.css, webflow.css, or rim.webflow.css directly.
+*/
+
+/* Fix: program list block grid was right-aligning content (justify-items: end)
+   due to Webflow's place-items: center end shorthand. Left-align instead. */
+.programlistblock {
+  justify-items: start;
+}
