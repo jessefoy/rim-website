@@ -4,8 +4,46 @@
   Do not modify normalize.css, webflow.css, or rim.webflow.css directly.
 */
 
-/* Fix: program list block grid was right-aligning content (justify-items: end)
-   due to Webflow's place-items: center end shorthand. Left-align instead. */
+
+/* ═══════════════════════════════════════════════════
+   PROGRAM LIST ROW
+   Used on community-programs and elsewhere.
+   Replaces Webflow's fixed-pixel grid (802px 1fr) with
+   a clean flexbox layout: info left, button right.
+═══════════════════════════════════════════════════ */
+
 .programlistblock {
-  justify-items: start;
+  display: flex;           /* override w-layout-grid's display:grid */
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Button column: never shrink, always push to the right */
+.program-links {
+  flex-shrink: 0;
+}
+
+/* Tablet (≤991px): same flex layout, just tighter */
+@media screen and (max-width: 991px) {
+  .programlistblock {
+    gap: 16px;
+  }
+}
+
+/* Mobile (≤767px): stack vertically, button below info */
+@media screen and (max-width: 767px) {
+  .programlistblock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .program-links {
+    /* On mobile Webflow uses flex-direction: row-reverse which
+       visually reversed the button. With flexbox column stacking
+       we just left-align the button naturally. */
+    justify-content: flex-start;
+    margin-top: 0;
+  }
 }
