@@ -50,17 +50,6 @@
 
 
 /* ═══════════════════════════════════════════════════
-   MEMBERSTACK — prevent flash of wrong nav state
-   data-ms-content elements start hidden; Memberstack
-   JS reveals the correct ones after auth check.
-═══════════════════════════════════════════════════ */
-
-[data-ms-content] {
-  display: none;
-}
-
-
-/* ═══════════════════════════════════════════════════
    NAVIGATION DROPDOWNS
    Webflow JS normally adds w--open on hover/click.
    CSS hover covers desktop; nav.js handles click +
