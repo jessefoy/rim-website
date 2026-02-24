@@ -112,6 +112,36 @@
 
 
 /* ═══════════════════════════════════════════════════
+   FOOTER NEWSLETTER BAND
+   Pre-footer section shown on all public pages.
+   Sits above the dark blue footer.
+═══════════════════════════════════════════════════ */
+
+.footer-newsletter {
+  background-color: #f7f5f0;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.footer-newsletter-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-newsletter-heading {
+  color: #135274;
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.footer-newsletter-text {
+  color: #555;
+  margin-bottom: 28px;
+}
+
+
+/* ═══════════════════════════════════════════════════
    DONATE PAGE — ACCORDIONS
    Collapsed by default; JS toggles max-height on click.
    The arrow (rotate 90deg = pointing down = "expand")

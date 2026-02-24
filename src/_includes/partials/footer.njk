@@ -1,3 +1,13 @@
+{% if not memberArea %}
+<div class="footer-newsletter">
+  <div class="footer-newsletter-inner">
+    <h3 class="footer-newsletter-heading">Stay Connected</h3>
+    <p class="footer-newsletter-text">Sign up for the RIM Newsletter — programs, events, new library content, and community news.</p>
+    <div id="fd-form-6445bc34c8b890f50782ba90"></div>
+  </div>
+</div>
+{% endif %}
+
 <div class="footer">
   <div class="container-7">
     <div class="footer-top-row">
@@ -5,7 +15,14 @@
         <img src="/images/RIM-Website-Footer-Logo-White.png" height="" alt="Rooted In Mindfulness" width="75" class="footer-logo">
       </div>
       <div class="footer-links-column">
-        <div class="footer-links-column-child"></div>
+        <div class="footer-links-column-child">
+          <div class="footer-links-header">Explore</div>
+          <a href="/community-programs" class="footer-links-main">Programs</a>
+          <a href="/donate" class="footer-links-main">Donate</a>
+          <a href="/volunteerism/volunteer" class="footer-links-main">Volunteer</a>
+          <a href="/community-membership" class="footer-links-main">Join RIM</a>
+          <a href="/kalyana-mitta/community-groups-events" class="footer-links-main">Community Groups</a>
+        </div>
         <div class="footer-links-column-child">
           <div class="footer-address">Rooted In Mindfulness<br>4040 N. Calhoun Rd.<br>Brookfield, WI, 53005</div>
           <div class="footer-links-phone-email">
@@ -23,8 +40,30 @@
     </div>
   </div>
 </div>
-<div class="combine-section_banner1">
-  <div class="combine-padding-global">
-    <div class="combine-container-large"></div>
-  </div>
-</div>
+
+{% if not memberArea %}
+<script>
+(function(w, d, t, h, s, n) {
+  w.FlodeskObject = n;
+  var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
+  w[n] = w[n] || fn;
+  var f = d.getElementsByTagName(t)[0];
+  var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+  var sm = d.createElement(t);
+  sm.async = true;
+  sm.type = 'module';
+  sm.src = h + s + '.mjs' + v;
+  f.parentNode.insertBefore(sm, f);
+  var sn = d.createElement(t);
+  sn.async = true;
+  sn.noModule = true;
+  sn.src = h + s + '.js' + v;
+  f.parentNode.insertBefore(sn, f);
+})(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+
+window.fd('form', {
+  formId: '6445bc34c8b890f50782ba90',
+  containerEl: '#fd-form-6445bc34c8b890f50782ba90'
+});
+</script>
+{% endif %}
