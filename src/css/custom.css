@@ -109,3 +109,25 @@
   padding: 10px 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+
+/* ═══════════════════════════════════════════════════
+   DONATE PAGE — ACCORDIONS
+   Collapsed by default; JS toggles max-height on click.
+   The arrow (rotate 90deg = pointing down = "expand")
+   flips to rotate 270deg (pointing up) when open.
+═══════════════════════════════════════════════════ */
+
+.accordion-content-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-arrow {
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.accordion-open .accordion-arrow {
+  transform: rotate(270deg);
+}

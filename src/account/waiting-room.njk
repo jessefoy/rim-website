@@ -56,6 +56,28 @@ memberArea: true
 {% endblock %}
 
 {% block scripts %}
+<script>
+// Simple autoplay slide rotator — replaces webflow.js slider behaviour.
+// Shows one .w-slide at a time, cycling every 8 seconds.
+(function () {
+  var slides = Array.from(document.querySelectorAll('.waiting-room-slider .w-slide'));
+  if (slides.length < 2) return;
+  var current = 0;
+
+  function showSlide(n) {
+    slides.forEach(function (s, i) {
+      s.style.display = i === n ? 'block' : 'none';
+    });
+  }
+
+  showSlide(0);
+  setInterval(function () {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 8000);
+}());
+</script>
+
 <!--  ============================================================  -->
 <!--  ROOTED IN MINDFULNESS - ENHANCED WAITING ROOM CONTROLLER    -->
 <!--  Smart messaging to help users know if they're in the right   -->

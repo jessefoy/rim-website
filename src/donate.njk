@@ -3,6 +3,32 @@ layout: base.njk
 title: "Donate"
 ---
 
+{% block head %}
+<script async src="https://widgets.givebutter.com/latest.umd.cjs?acct=GcnXeYilkL4lWnr3&p=other"></script>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.accordion-title').forEach(function (title) {
+    title.addEventListener('click', function () {
+      var item    = this.closest('.accordion-item');
+      var wrapper = item.querySelector('.accordion-content-wrapper');
+      var isOpen  = item.classList.contains('accordion-open');
+
+      if (isOpen) {
+        wrapper.style.maxHeight = '0';
+        item.classList.remove('accordion-open');
+      } else {
+        wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+        item.classList.add('accordion-open');
+      }
+    });
+  });
+});
+</script>
+{% endblock %}
+
 <div class="donation-categories-section">
   <div class="contain">
     <div class="flex-hor-left-middle">
