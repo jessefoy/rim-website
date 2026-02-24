@@ -3,17 +3,18 @@ if (!client) { module.exports = async function() { return []; }; return; }
 
 module.exports = async function () {
   try {
-    const query = `*[_type == "programs" && !(_id in path("drafts.**"))] | order(sortOrder asc) {
+    const query = `*[_type == "programs" && !(_id in path("drafts.**")) && removeFromProgramList != true] | order(sortOrder asc) {
       _id,
       name,
       sortOrder,
-      dayOfWeek-> {
+      dayOfWeek[]-> {
         name
       },
-      dayAndTimeText,
+      dayFiltering,
+      listingDayAndTimeText,
       zoomLink,
-      specialAnnouncement,
-      earlyArrivalMessage
+      dashboardSpecialAnnouncement,
+      dashboardEarlyArrivalMessage
     }`;
 
     return await client.fetch(query);
