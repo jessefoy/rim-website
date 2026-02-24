@@ -3,14 +3,23 @@ if (!client) { module.exports = async function() { return []; }; return; }
 
 module.exports = async function () {
   try {
-    const query = `*[_type == "program" && hideFromProgramPageList != true] | order(sortOrder asc) {
+    const query = `*[_type == "programs" && !(_id in path("drafts.**")) && hideFromProgramPageList != true] | order(sortOrder asc) {
       _id,
-      _type,
       name,
       slug,
+      tagline,
+      listingDayAndTimeText,
+      dateText,
+      timeText,
+      locationText,
+      danaText,
       sortOrder,
-      description,
-      shortDescription,
+      dashboardSpecialAnnouncement,
+      registrationRequired,
+      registrationClosed,
+      filloutRegistrationFormId,
+      zoomLink,
+      zoomLinkText,
       programCategory-> {
         name,
         slug
@@ -18,19 +27,17 @@ module.exports = async function () {
       teacherFacilitators[]-> {
         name,
         slug,
+        title,
         bioPicture {
-          asset-> {
-            url
-          }
+          asset-> { url }
         }
       },
-      dayOfWeek-> {
-        name
+      dayOfWeek[]-> {
+        name,
+        slug
       },
       largeProgramImage {
-        asset-> {
-          url
-        }
+        asset-> { url }
       }
     }`;
 

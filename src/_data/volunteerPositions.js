@@ -3,7 +3,7 @@ if (!client) { module.exports = async function() { return []; }; return; }
 
 module.exports = async function () {
   try {
-    const query = `*[_type == "volunteerPosition" && visibleOnVolunteerListingPage == true] {
+    const query = `*[_type == "volunteerPositions" && !(_id in path("drafts.**")) && visibleOnVolunteerListingPage == true] {
       _id,
       _type,
       name,

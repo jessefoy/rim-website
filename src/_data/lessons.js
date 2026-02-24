@@ -3,7 +3,7 @@ if (!client) { module.exports = async function() { return []; }; return; }
 
 module.exports = async function () {
   try {
-    const query = `*[_type == "lessons"] | order(name asc) {
+    const query = `*[_type == "lessons" && !(_id in path("drafts.**"))] | order(name asc) {
       _id,
       name,
       slug,

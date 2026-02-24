@@ -3,7 +3,7 @@ if (!client) { module.exports = async function() { return []; }; return; }
 
 module.exports = async function () {
   try {
-    const query = `*[_type == "programCategory" && hideFromProgramsPage != true] {
+    const query = `*[_type == "programCategories" && !(_id in path("drafts.**")) && hideFromProgramsPage != true] {
       _id,
       _type,
       name,
