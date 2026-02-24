@@ -112,65 +112,126 @@
 
 
 /* ═══════════════════════════════════════════════════
-   FOOTER — 3-COLUMN LAYOUT
-   HTML order: newsletter | logo+contact | explore
-   Desktop: flex row, reordered via CSS order property
-            → logo+contact | explore | newsletter
-   Mobile:  display:block so columns stack in HTML order
-            → newsletter → logo+contact → explore
-   Using block (not flex) on mobile avoids the async
-   Flodesk render causing flex items to overlap.
+   FOOTER — fresh CSS, no webflow footer classes
+   3 columns on desktop, single stack on mobile.
+   Newsletter first in HTML = first on mobile naturally.
 ═══════════════════════════════════════════════════ */
 
-/* Desktop: flex row, top-aligned */
-.footer-top-row {
-  align-items: flex-start !important;
+.rim-footer {
+  background-color: #135274;
+  padding: 52px 32px 28px;
 }
 
-.footer-logo-column {
-  order: 1;
-  width: 30% !important;
+.rim-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.footer-col-explore {
-  order: 2;
-  width: 22%;
-  display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
+  gap: 48px;
+}
+
+/* Each column stacks its children vertically */
+.rim-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rim-footer-newsletter { flex: 1.4; }
+.rim-footer-contact    { flex: 1; }
+.rim-footer-links      { flex: 0.8; }
+
+.rim-footer-heading {
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.rim-footer-logo {
+  width: 65px;
+  margin-bottom: 4px;
+}
+
+.rim-footer-address {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.rim-footer-contact-links {
+  display: flex;
+  flex-direction: column;
   gap: 4px;
+  margin-top: 4px;
 }
 
-.footer-col-newsletter {
-  order: 3;
-  flex: 1;
+.rim-footer-contact-links a,
+.rim-footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s;
 }
 
-/* Mobile: plain block stacking — no flex, no order, no overlap */
+.rim-footer-contact-links a:hover,
+.rim-footer-links a:hover { color: #fff; }
+
+.rim-footer-bottom {
+  max-width: 1100px;
+  margin: 36px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.rim-footer-bottom a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.rim-footer-bottom a:hover { color: #fff; }
+
+/* Mobile: single column stack */
 @media screen and (max-width: 767px) {
-  .footer-top-row {
-    display: block !important;
+  .rim-footer {
+    padding: 40px 20px 24px;
   }
 
-  .footer-col-newsletter,
-  .footer-logo-column,
-  .footer-col-explore {
-    display: block !important;
-    width: 100% !important;
-    position: static !important;
-    margin-bottom: 32px;
+  .rim-footer-inner {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .rim-footer-newsletter,
+  .rim-footer-contact,
+  .rim-footer-links {
+    flex: none;
+    width: 100%;
+  }
+
+  .rim-footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 
-/* Footer newsletter form — custom, no third-party embed */
+/* Newsletter form */
 .footer-subscribe-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 4px;
 }
 
 .footer-input {
@@ -198,7 +259,7 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s;
 }
 
 .footer-subscribe-btn:hover    { background: #e8f0f5; }

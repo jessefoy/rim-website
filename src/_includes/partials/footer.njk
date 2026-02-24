@@ -1,50 +1,50 @@
-<div class="footer">
-  <div class="container-7">
-    <div class="footer-top-row">
+<footer class="rim-footer">
+  <div class="rim-footer-inner">
 
-      <!-- Newsletter first in DOM so it stacks first on mobile -->
-      {% if not memberArea %}
-      <div class="footer-col-newsletter">
-        <div class="footer-links-header">Stay Connected</div>
-        <form class="footer-subscribe-form" id="footer-subscribe-form" novalidate>
-          <input type="text"  name="first_name" placeholder="First name"     class="footer-input">
-          <input type="email" name="email"      placeholder="Email address"  class="footer-input" required>
-          <button type="submit" class="footer-subscribe-btn">Subscribe</button>
-          <p class="footer-subscribe-msg" id="footer-subscribe-msg" hidden></p>
-        </form>
+    <!-- Newsletter — first in DOM = first on mobile -->
+    {% if not memberArea %}
+    <div class="rim-footer-col rim-footer-newsletter">
+      <div class="rim-footer-heading">Stay Connected</div>
+      <form class="footer-subscribe-form" id="footer-subscribe-form" novalidate>
+        <input type="text"  name="first_name" placeholder="First name"    class="footer-input">
+        <input type="email" name="email"      placeholder="Email address" class="footer-input" required>
+        <button type="submit" class="footer-subscribe-btn">Subscribe</button>
+        <p class="footer-subscribe-msg" id="footer-subscribe-msg" hidden></p>
+      </form>
+    </div>
+    {% endif %}
+
+    <!-- Contact -->
+    <div class="rim-footer-col rim-footer-contact">
+      <img src="/images/RIM-Website-Footer-Logo-White.png" alt="Rooted In Mindfulness" width="65" class="rim-footer-logo">
+      <div class="rim-footer-address">
+        Rooted In Mindfulness<br>
+        4040 N. Calhoun Rd.<br>
+        Brookfield, WI, 53005
       </div>
-      {% endif %}
-
-      <!-- Logo + Contact -->
-      <div class="footer-logo-column">
-        <img src="/images/RIM-Website-Footer-Logo-White.png" height="" alt="Rooted In Mindfulness" width="75" class="footer-logo">
-        <div class="footer-address">Rooted In Mindfulness<br>4040 N. Calhoun Rd.<br>Brookfield, WI, 53005</div>
-        <div class="footer-links-phone-email">
-          <div class="footer-telephone">
-            <a href="tel:4148828932" class="link">(414) 882-8932</a>
-          </div>
-          <a href="mailto:support@rootedinmindfulness.org?subject=Dear%20RIM%20Support" class="footer-link-email">support@rootedinmindfulness.org</a>
-        </div>
+      <div class="rim-footer-contact-links">
+        <a href="tel:4148828932">(414) 882-8932</a>
+        <a href="mailto:support@rootedinmindfulness.org?subject=Dear%20RIM%20Support">support@rootedinmindfulness.org</a>
       </div>
-
-      <!-- Explore links -->
-      <div class="footer-col-explore">
-        <div class="footer-links-header">Explore</div>
-        <a href="/community-programs" class="footer-links-main">Programs</a>
-        <a href="/donate" class="footer-links-main">Donate</a>
-        <a href="/volunteerism/volunteer" class="footer-links-main">Volunteer</a>
-        <a href="/community-membership" class="footer-links-main">Join RIM</a>
-        <a href="/kalyana-mitta/community-groups-events" class="footer-links-main">Community Groups</a>
-      </div>
-
     </div>
 
-    <div class="footer-bottom-row">
-      <div class="small-text-2">©2020 Rooted In Mindfulness | 501(c)(3) Non-Profit | <a href="/donate" target="_blank" class="link-3">Donate</a></div>
-      <div class="small-text-2">Powered by Kind People :) <a href="/volunteerism/volunteer" class="link-2">Volunteer</a></div>
+    <!-- Explore links -->
+    <div class="rim-footer-col rim-footer-links">
+      <div class="rim-footer-heading">Explore</div>
+      <a href="/community-programs">Programs</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteerism/volunteer">Volunteer</a>
+      <a href="/community-membership">Join RIM</a>
+      <a href="/kalyana-mitta/community-groups-events">Community Groups</a>
     </div>
+
   </div>
-</div>
+
+  <div class="rim-footer-bottom">
+    <span>©2020 Rooted In Mindfulness | 501(c)(3) Non-Profit | <a href="/donate">Donate</a></span>
+    <span>Powered by Kind People :) <a href="/volunteerism/volunteer">Volunteer</a></span>
+  </div>
+</footer>
 
 {% if not memberArea %}
 <script>
@@ -72,10 +72,7 @@
       var res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          first_name: form.first_name.value.trim()
-        })
+        body: JSON.stringify({ email: email, first_name: form.first_name.value.trim() })
       });
 
       var data = await res.json();
