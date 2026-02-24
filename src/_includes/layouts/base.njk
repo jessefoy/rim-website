@@ -32,7 +32,7 @@
 <body>
   {% include "partials/nav.njk" %}
 
-  {% block content %}{% endblock %}
+  {{ content | safe }}
 
   {% include "partials/footer.njk" %}
 
