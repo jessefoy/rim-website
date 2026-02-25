@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
   }
 
   const auth = 'Basic ' + Buffer.from(apiKey + ':').toString('base64');
-  const SEGMENT_ID = '5ccc0af82490f4000f3e6f1d';
+  const SEGMENT_ID = '6340e5b00170f97cbdfc4b87';
 
   try {
     // Step 1: Create or update subscriber
