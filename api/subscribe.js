@@ -44,9 +44,13 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Step 2: Add to segment
+    // Get the subscriber ID returned by Flodesk
+    const subscriber = await subRes.json().catch(() => ({}));
+    const subscriberId = subscriber.id || encodeURIComponent(email.trim().toLowerCase());
+
+    // Step 2: Add to segment using subscriber ID
     const segRes = await fetch(
-      `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email.trim().toLowerCase())}/segments`,
+      `https://api.flodesk.com/v1/subscribers/${subscriberId}/segments`,
       {
         method: 'POST',
         headers: {
@@ -58,9 +62,8 @@ module.exports = async function handler(req, res) {
       }
     );
 
-    // Segment step failing shouldn't block success — subscriber was created
     if (!segRes.ok) {
-      console.warn('Segment assignment failed for', email, await segRes.text());
+      console.warn('Segment assignment failed:', subscriberId, await segRes.text());
     }
 
     return res.status(200).json({ success: true });
