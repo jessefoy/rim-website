@@ -158,13 +158,6 @@ export default defineType({
       group: "details",
     }),
     defineField({
-      name: "eventTime",
-      title: "Event Time",
-      description: "Start time used for Zoom link timing (e.g. 7:00 PM)",
-      type: "string",
-      group: "details",
-    }),
-    defineField({
       name: "zoomLink",
       title: "Zoom Link",
       type: "url",
