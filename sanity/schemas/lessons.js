@@ -26,6 +26,21 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "heroImage",
+      title: "Hero Image",
+      description: "Optional. A full-width editorial image displayed below the lesson title. Landscape or square images work best. If no image is added, the page simply starts with the audio player or content — nothing is missing. Always fill in the Alt Text field below when you upload an image.",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          description: "Required if you upload an image. Briefly describe what's in the image for screen readers and search engines. Example: 'A lotus flower floating on still water at dawn.'",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
       name: "isSectionTitle",
       title: "Section Title?",
       description: "If ON, this item is treated as a section header within a course",
@@ -40,10 +55,11 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
-      name: "podcastId",
-      title: "Podcast ID",
-      description: "Captivate podcast episode ID",
-      type: "string",
+      name: "audioFile",
+      title: "Audio File",
+      description: "Upload the MP3 recording here. Appears when 'Includes Audio?' is turned on.",
+      type: "file",
+      options: { accept: "audio/mpeg,audio/mp4,audio/wav,audio/*" },
       hidden: ({ document }) => !document?.includesAudio,
     }),
     defineField({
@@ -103,6 +119,74 @@ export default defineType({
           },
         },
         { type: "image", options: { hotspot: true } },
+        {
+          type: "object",
+          name: "practiceCallout",
+          title: "Practice Suggestion",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              description: "e.g. 'Practice Suggestion' or 'Try This'",
+              type: "string",
+              initialValue: "Practice Suggestion",
+            }),
+            defineField({
+              name: "content",
+              title: "Content",
+              description: "The practice instructions. Supports bold, italic, and bullet or numbered lists.",
+              type: "array",
+              of: [
+                {
+                  type: "block",
+                  styles: [{ title: "Normal", value: "normal" }],
+                  lists: [
+                    { title: "Bullet", value: "bullet" },
+                    { title: "Numbered", value: "number" },
+                  ],
+                  marks: {
+                    decorators: [
+                      { title: "Bold", value: "strong" },
+                      { title: "Italic", value: "em" },
+                    ],
+                  },
+                },
+              ],
+            }),
+          ],
+          preview: {
+            select: { title: "title" },
+            prepare({ title }) {
+              return { title: `📦 ${title || "Practice Suggestion"}` };
+            },
+          },
+        },
+        {
+          type: "object",
+          name: "bodyQuote",
+          title: "Quote (inline)",
+          fields: [
+            defineField({
+              name: "quote",
+              title: "Quote",
+              description: "The quoted text. Do not include quotation marks — they are added automatically.",
+              type: "text",
+              rows: 3,
+            }),
+            defineField({
+              name: "attribution",
+              title: "Attribution",
+              description: "Optional. Who said it — e.g. 'Thich Nhat Hanh' or 'The Buddha'",
+              type: "string",
+            }),
+          ],
+          preview: {
+            select: { title: "quote", subtitle: "attribution" },
+            prepare({ title, subtitle }) {
+              return { title: `❝ ${title}`, subtitle };
+            },
+          },
+        },
       ],
     }),
     defineField({
