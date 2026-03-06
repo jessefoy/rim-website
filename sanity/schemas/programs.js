@@ -107,13 +107,6 @@ export default defineType({
       group: "schedule",
     }),
     defineField({
-      name: "listingDayAndTimeText",
-      title: "Listing Day & Time",
-      description: 'Concise version shown on listing cards and the dashboard, e.g. "Wed · 6pm"',
-      type: "string",
-      group: "schedule",
-    }),
-    defineField({
       name: "startDatetime",
       title: "Start Date & Time",
       description:
