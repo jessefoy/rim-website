@@ -5,14 +5,15 @@ export default defineType({
   title: "Programs",
   type: "document",
   groups: [
-    { name: "content",      title: "Content" },
-    { name: "schedule",     title: "Schedule & Location" },
-    { name: "registration", title: "Registration" },
-    { name: "dana",         title: "Dana" },
-    { name: "dashboard",    title: "Dashboard" },
-    { name: "visibility",   title: "Visibility" },
+    { name: "basics",       title: "1 — Basics" },
+    { name: "schedule",     title: "2 — When & Where" },
+    { name: "registration", title: "3 — Registration" },
+    { name: "emails",       title: "4 — Emails" },
+    { name: "dana",         title: "5 — Dana" },
+    { name: "settings",     title: "6 — Settings" },
   ],
   fields: [
+    // ── Always visible (ungrouped — appear above tabs) ────────────────────────
     defineField({
       name: "name",
       title: "Name",
@@ -27,64 +28,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
 
-    // ── Content ──────────────────────────────────────────────────────────────
-    defineField({
-      name: "tagline",
-      title: "Tagline",
-      description: "Short description shown on program listings",
-      type: "string",
-      group: "content",
-    }),
-    defineField({
-      name: "largeProgramImage",
-      title: "Program Image",
-      type: "image",
-      options: { hotspot: true },
-      group: "content",
-    }),
-    defineField({
-      name: "programDescription",
-      title: "Program Description",
-      type: "richContent",
-      group: "content",
-    }),
-    defineField({
-      name: "quote",
-      title: "Pull Quote",
-      type: "text",
-      group: "content",
-    }),
-    defineField({
-      name: "quoteSource",
-      title: "Quote Source",
-      type: "string",
-      group: "content",
-    }),
-    defineField({
-      name: "specialNotes",
-      title: "Special Notes",
-      description: "Displayed on the program page below the description",
-      type: "array",
-      group: "content",
-      of: [{ type: "block" }],
-    }),
-    defineField({
-      name: "teacherFacilitators",
-      title: "Teacher / Facilitator(s)",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "teams" }] }],
-      group: "content",
-    }),
-    defineField({
-      name: "linkedCourses",
-      title: "Linked Courses (Online Materials)",
-      description: "Members who register for this program automatically get access to all listed courses.",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "courses" }] }],
-      group: "content",
-    }),
+    // ── Step 1: Basics ────────────────────────────────────────────────────────
+    // What is this program? Identity, content, and who leads it.
 
-    // ── Schedule & Location ───────────────────────────────────────────────────
     defineField({
       name: "programCategory",
       title: "Program Category",
@@ -97,12 +43,63 @@ export default defineType({
         disableNew: true,
         filter: "hideFromProgramsPage != true",
       },
-      group: "schedule",
+      group: "basics",
     }),
     defineField({
+      name: "tagline",
+      title: "Tagline",
+      description: "Short description shown on program listings",
+      type: "string",
+      group: "basics",
+    }),
+    defineField({
+      name: "largeProgramImage",
+      title: "Program Image",
+      type: "image",
+      options: { hotspot: true },
+      group: "basics",
+    }),
+    defineField({
+      name: "programDescription",
+      title: "Program Description",
+      type: "richContent",
+      group: "basics",
+    }),
+    defineField({
+      name: "quote",
+      title: "Pull Quote",
+      type: "text",
+      group: "basics",
+    }),
+    defineField({
+      name: "quoteSource",
+      title: "Quote Source",
+      type: "string",
+      group: "basics",
+    }),
+    defineField({
+      name: "specialNotes",
+      title: "Special Notes",
+      description: "Displayed on the program page below the description",
+      type: "array",
+      group: "basics",
+      of: [{ type: "block" }],
+    }),
+    defineField({
+      name: "teacherFacilitators",
+      title: "Teacher / Facilitator(s)",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "teams" }] }],
+      group: "basics",
+    }),
+
+    // ── Step 2: When & Where ──────────────────────────────────────────────────
+    // Date, time, recurrence, and where it meets (in-person or virtual).
+
+    defineField({
       name: "dateText",
-      title: "Date & Time",
-      description: 'e.g. "Every Wednesday, 6–7:30pm" or "June 7–9, 2025 · 9am–5pm"',
+      title: "Date & Time Label",
+      description: 'Display text shown on the program page — e.g. "Every Wednesday, 6–7:30pm" or "June 7–9 · 9am–5pm"',
       type: "string",
       group: "schedule",
     }),
@@ -110,8 +107,8 @@ export default defineType({
       name: "startDatetime",
       title: "Start Date & Time",
       description:
-        "Used to generate Add-to-Calendar links and to create Google Meet rooms. " +
-        "Leave blank for recurring or open-ended programs.",
+        "Used for Add-to-Calendar links, Google Meet setup, and reminder scheduling. " +
+        "Leave blank for open-ended or drop-in programs.",
       type: "datetime",
       group: "schedule",
     }),
@@ -119,8 +116,7 @@ export default defineType({
       name: "endDatetime",
       title: "End Date & Time",
       description:
-        "Optional end time for Add-to-Calendar links. " +
-        "Defaults to 1 hour after start if left blank.",
+        "Optional. Defaults to 1 hour after start if left blank.",
       type: "datetime",
       group: "schedule",
     }),
@@ -177,11 +173,25 @@ export default defineType({
       hidden: ({ document }) => !document?.recurrenceFreq,
       validation: (Rule) => Rule.integer().min(2).max(365),
     }),
+
+    defineField({
+      name: "isVirtual",
+      title: "Virtual Program",
+      description:
+        "Turn on for programs that meet online. Turns off the location fields and enables Google Meet setup. " +
+        "When a Start Date & Time is set, a Google Meet link will be created automatically when you publish.",
+      type: "boolean",
+      initialValue: false,
+      group: "schedule",
+    }),
+
+    // Location fields — shown only when NOT virtual
     defineField({
       name: "locationText",
       title: "Location",
       type: "string",
       group: "schedule",
+      hidden: ({ document }) => !!document?.isVirtual,
     }),
     defineField({
       name: "locationLink",
@@ -189,36 +199,47 @@ export default defineType({
       description: "Google Maps or website URL",
       type: "url",
       group: "schedule",
+      hidden: ({ document }) => !!document?.isVirtual,
     }),
+
+    // Virtual fields — shown only when virtual
     defineField({
       name: "zoomLink",
       title: "Meeting Link",
-      description: "Google Meet or Zoom URL. Auto-filled when a Google Meet is created via the /volunteer area.",
+      description:
+        "Auto-filled when a Google Meet is created. You can also paste a Zoom or other URL here manually.",
       type: "url",
       group: "schedule",
+      hidden: ({ document }) => !document?.isVirtual,
     }),
     defineField({
       name: "meetHostAccount",
       title: "Meet Host Account",
-      description: "Set automatically when a Google Meet is created. The host team logs into this account to host the session.",
+      description:
+        "Set automatically when a Google Meet is created. The host team logs into this account to host the session.",
       type: "string",
       readOnly: true,
       group: "schedule",
+      hidden: ({ document }) => !document?.isVirtual,
+    }),
+    defineField({
+      name: "calendarEventId",
+      title: "Google Calendar Event ID",
+      description:
+        "Set automatically. Used to update or cancel the room booking when program details change.",
+      type: "string",
+      readOnly: true,
+      group: "schedule",
+      hidden: ({ document }) => !document?.isVirtual,
     }),
 
-    // ── Registration ─────────────────────────────────────────────────────────
+    // ── Step 3: Registration ──────────────────────────────────────────────────
+    // Who can sign up, how many, and what questions to ask them.
+
     defineField({
       name: "registrationEnabled",
       title: "Enable Registration",
       description: "Turns on the built-in registration form for this program",
-      type: "boolean",
-      initialValue: false,
-      group: "registration",
-    }),
-    defineField({
-      name: "registrationClosed",
-      title: "Registration Closed",
-      description: "Manually close registration even if capacity remains and the deadline hasn't passed",
       type: "boolean",
       initialValue: false,
       group: "registration",
@@ -235,6 +256,14 @@ export default defineType({
       title: "Registration Deadline",
       description: "Form closes automatically at this date/time",
       type: "datetime",
+      group: "registration",
+    }),
+    defineField({
+      name: "registrationClosed",
+      title: "Registration Closed",
+      description: "Manually close registration even if capacity remains and the deadline hasn't passed",
+      type: "boolean",
+      initialValue: false,
       group: "registration",
     }),
     defineField({
@@ -292,6 +321,19 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "linkedCourses",
+      title: "Linked Courses (Online Materials)",
+      description:
+        "Members who register for this program automatically get access to all listed courses.",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "courses" }] }],
+      group: "registration",
+    }),
+
+    // ── Step 4: Emails ────────────────────────────────────────────────────────
+    // What registrants receive after signing up and before the program.
+
+    defineField({
       name: "confirmationMessage",
       title: "Confirmation Email Message",
       description:
@@ -299,7 +341,7 @@ export default defineType({
         "Supports bold, italic, links, and bullet lists. " +
         "If blank, no extra message is added.",
       type: "array",
-      group: "registration",
+      group: "emails",
       of: [
         {
           type: "block",
@@ -327,7 +369,7 @@ export default defineType({
       title: "Reminder Email Date",
       description: "The system will automatically send a reminder email to all registrants on this date.",
       type: "datetime",
-      group: "registration",
+      group: "emails",
     }),
     defineField({
       name: "reminderMessage",
@@ -337,7 +379,7 @@ export default defineType({
         "Supports bold, italic, links, and bullet lists. " +
         "If blank, a standard reminder is sent.",
       type: "array",
-      group: "registration",
+      group: "emails",
       of: [
         {
           type: "block",
@@ -361,7 +403,9 @@ export default defineType({
       ],
     }),
 
-    // ── Dana ──────────────────────────────────────────────────────────────────
+    // ── Step 5: Dana ──────────────────────────────────────────────────────────
+    // How dana or payment is handled for this program.
+
     defineField({
       name: "danaMode",
       title: "Dana Mode",
@@ -421,28 +465,30 @@ export default defineType({
       group: "dana",
     }),
 
-    // ── Dashboard ─────────────────────────────────────────────────────────────
-    defineField({
-      name: "dashboardSpecialAnnouncement",
-      title: "Special Announcement",
-      description: "Appears in red on the member dashboard for this program",
-      type: "string",
-      group: "dashboard",
-    }),
-    defineField({
-      name: "dashboardEarlyArrivalMessage",
-      title: "Early Arrival Message",
-      description: "Appears in grey on the member dashboard for this program",
-      type: "string",
-      group: "dashboard",
-    }),
+    // ── Step 6: Settings ──────────────────────────────────────────────────────
+    // How this program appears on the member dashboard and public listings.
+
     defineField({
       name: "dayOfWeek",
       title: "Day of the Week",
       description: "Controls which day(s) this program appears on the member dashboard",
       type: "array",
       of: [{ type: "reference", to: [{ type: "weekdays" }] }],
-      group: "dashboard",
+      group: "settings",
+    }),
+    defineField({
+      name: "dashboardSpecialAnnouncement",
+      title: "Special Announcement",
+      description: "Appears in red on the member dashboard for this program",
+      type: "string",
+      group: "settings",
+    }),
+    defineField({
+      name: "dashboardEarlyArrivalMessage",
+      title: "Early Arrival Message",
+      description: "Appears in grey on the member dashboard for this program",
+      type: "string",
+      group: "settings",
     }),
     defineField({
       name: "removeFromProgramList",
@@ -450,16 +496,14 @@ export default defineType({
       description: "When checked, this program will not appear on the member dashboard drop-in list",
       type: "boolean",
       initialValue: false,
-      group: "dashboard",
+      group: "settings",
     }),
-
-    // ── Visibility ────────────────────────────────────────────────────────────
     defineField({
       name: "sortOrder",
       title: "Sort Order",
       description: "Lower numbers appear first on all listing pages",
       type: "number",
-      group: "visibility",
+      group: "settings",
     }),
     defineField({
       name: "hideFromProgramPageList",
@@ -469,7 +513,7 @@ export default defineType({
         "The program's own page is still accessible by direct link.",
       type: "boolean",
       initialValue: false,
-      group: "visibility",
+      group: "settings",
     }),
   ],
   orderings: [
