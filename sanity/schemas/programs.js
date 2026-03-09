@@ -13,23 +13,30 @@ export default defineType({
     { name: "settings",     title: "6 — Settings" },
   ],
   fields: [
-    // ── Always visible (ungrouped — appear above tabs) ────────────────────────
+    // ── Step 1: Basics ────────────────────────────────────────────────────────
+    // What is this program? Identity, content, and who leads it.
+
     defineField({
       name: "name",
       title: "Name",
+      description:
+        "The program's full name as it appears on the website, in emails, and on registration confirmations. " +
+        "Use the official name — avoid abbreviations unless they are widely understood.",
       type: "string",
+      group: "basics",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
       title: "Slug",
+      description:
+        "The URL path for this program — e.g. 'wednesday-drop-in' becomes /programs/wednesday-drop-in. " +
+        "Auto-generated from the name. ⚠ Don't change this after the program is live — existing links and bookmarks will break.",
       type: "slug",
       options: { source: "name" },
+      group: "basics",
       validation: (Rule) => Rule.required(),
     }),
-
-    // ── Step 1: Basics ────────────────────────────────────────────────────────
-    // What is this program? Identity, content, and who leads it.
 
     defineField({
       name: "programCategory",
@@ -48,13 +55,20 @@ export default defineType({
     defineField({
       name: "tagline",
       title: "Tagline",
-      description: "Short description shown on program listings",
+      description:
+        "One or two sentences shown on the programs listing page beneath the name — " +
+        "often the first thing someone reads when deciding whether to learn more. " +
+        "Capture the spirit and purpose of the program concisely.",
       type: "string",
       group: "basics",
     }),
     defineField({
       name: "largeProgramImage",
       title: "Program Image",
+      description:
+        "Hero image displayed at the top of the program page. " +
+        "Use a high-quality landscape photo (at least 1200px wide). " +
+        "If left blank, the page shows a plain colored header.",
       type: "image",
       options: { hotspot: true },
       group: "basics",
@@ -62,25 +76,38 @@ export default defineType({
     defineField({
       name: "programDescription",
       title: "Program Description",
+      description:
+        "The main body of the program page. Describe what the program is, what participants can expect, " +
+        "and why it exists — write for someone who knows nothing about RIM. " +
+        "Supports headings, pull quotes, callout boxes, and other rich content.",
       type: "richContent",
       group: "basics",
     }),
     defineField({
       name: "quote",
       title: "Pull Quote",
+      description:
+        "An inspirational quote shown prominently on the program page — a teaching, a line of poetry, " +
+        "or a phrase that captures the essence of this practice. Displayed in large italic text.",
       type: "text",
       group: "basics",
     }),
     defineField({
       name: "quoteSource",
       title: "Quote Source",
+      description:
+        "Attribution for the pull quote — teacher's name, book title, or tradition. " +
+        "E.g. 'Ajahn Chah' or 'Bhagavad Gita'.",
       type: "string",
       group: "basics",
     }),
     defineField({
       name: "specialNotes",
       title: "Special Notes",
-      description: "Displayed on the program page below the description",
+      description:
+        "Logistical notices or temporary information that don't belong in the main description — " +
+        "e.g. 'This program will be held on Zoom during building renovations.' " +
+        "Shown below the description on the program page. Clear it once it's no longer relevant.",
       type: "array",
       group: "basics",
       of: [{ type: "block" }],
@@ -88,6 +115,9 @@ export default defineType({
     defineField({
       name: "teacherFacilitators",
       title: "Teacher / Facilitator(s)",
+      description:
+        "The teacher(s) or facilitator(s) who lead this program. Their name, photo, and bio will appear on the program page. " +
+        "Select from existing team profiles — if someone is missing, add them in the Teams section first.",
       type: "array",
       of: [{ type: "reference", to: [{ type: "teams" }] }],
       group: "basics",
@@ -107,8 +137,12 @@ export default defineType({
       name: "startDatetime",
       title: "Start Date & Time",
       description:
-        "Used for Add-to-Calendar links, Google Meet setup, and reminder scheduling. " +
-        "Leave blank for open-ended or drop-in programs.",
+        "The date and time the program begins. This field drives two things: " +
+        "(1) Add-to-Calendar links on the program page, and " +
+        "(2) reminder email scheduling (reminder sends at 9am Central on the date you set in Step 4). " +
+        "For virtual and hybrid programs, set this before creating a Google Meet in the Registrar Area — " +
+        "it determines the room booking time slot. " +
+        "Leave blank only for open-ended or ongoing drop-in programs with no fixed start date.",
       type: "datetime",
       group: "schedule",
     }),
@@ -175,71 +209,105 @@ export default defineType({
     }),
 
     defineField({
-      name: "isVirtual",
-      title: "Virtual Program",
+      name: "programFormat",
+      title: "Format",
       description:
-        "Turn on for programs that meet online. Turns off the location fields and enables Google Meet setup. " +
-        "When a Start Date & Time is set, a Google Meet link will be created automatically when you publish.",
-      type: "boolean",
-      initialValue: false,
-      group: "schedule",
-    }),
-
-    // Location fields — shown only when NOT virtual
-    defineField({
-      name: "locationText",
-      title: "Location",
+        "How does this program meet? " +
+        "In-person — everyone attends at RIM. " +
+        "Virtual — the session is online only via Google Meet. " +
+        "Hybrid — some participants are at RIM, others join via Google Meet. " +
+        "Virtual and Hybrid programs show a Google Meet section in the Registrar Area where a Meet link can be created and managed.",
       type: "string",
       group: "schedule",
-      hidden: ({ document }) => !!document?.isVirtual,
+      options: {
+        list: [
+          { title: "In-person", value: "in-person" },
+          { title: "Virtual",   value: "virtual" },
+          { title: "Hybrid",    value: "hybrid" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "in-person",
+    }),
+
+    // Venue — shown for in-person and hybrid; drives location display on program page + emails
+    defineField({
+      name: "venue",
+      title: "Venue",
+      description:
+        "Where does this program meet in person? " +
+        "'At RIM' automatically fills in the address and Google Maps link — no extra steps. " +
+        "Choose 'Other location' for retreats or off-site events, then fill in the custom location fields below.",
+      type: "string",
+      group: "schedule",
+      options: {
+        list: [
+          { title: "At RIM (16905 W. Bluemound Rd., Brookfield)", value: "at-rim" },
+          { title: "Other location", value: "other" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "at-rim",
+      hidden: ({ document }) => document?.programFormat === "virtual",
+    }),
+
+    // Custom location fields — only shown for "other" venue
+    defineField({
+      name: "locationText",
+      title: "Location Name",
+      description:
+        "The venue name and/or address for off-site programs — shown on the program page and in reminder emails. " +
+        "E.g. 'Forest Refuge, 99 Woodland St., Barre, MA'. " +
+        "Only shown when Venue is set to 'Other location'.",
+      type: "string",
+      group: "schedule",
+      hidden: ({ document }) => document?.programFormat === "virtual" || document?.venue !== "other",
     }),
     defineField({
       name: "locationLink",
       title: "Location Link",
-      description: "Google Maps or website URL",
+      description:
+        "A Google Maps link or venue website URL. When set, the location name on the program page becomes a clickable link. " +
+        "Paste the full URL including https://. Only shown when Venue is set to 'Other location'.",
       type: "url",
       group: "schedule",
-      hidden: ({ document }) => !!document?.isVirtual,
+      hidden: ({ document }) => document?.programFormat === "virtual" || document?.venue !== "other",
     }),
 
-    // Virtual fields — shown only when virtual
+    // Meet fields — shown for virtual and hybrid
     defineField({
       name: "zoomLink",
       title: "Meeting Link",
       description:
-        "Auto-filled when a Google Meet is created. You can also paste a Zoom or other URL here manually.",
+        "The URL members use to join the online session. " +
+        "Use the Create Google Meet button in the Registrar Area to generate this automatically. " +
+        "Or paste a full URL here manually if you prefer to use a different link.",
       type: "url",
       group: "schedule",
-      hidden: ({ document }) => !document?.isVirtual,
+      hidden: ({ document }) => !document?.programFormat || document?.programFormat === "in-person",
     }),
     defineField({
       name: "meetHostAccount",
       title: "Meet Host Account",
       description:
-        "Set automatically when a Google Meet is created. The host team logs into this account to host the session.",
+        "Set automatically when a Google Meet is created — shows which shared Google account (e.g. meet1@rootedinmindfulness.org) was assigned to host this session. " +
+        "The volunteer host signs into this Google account before the session starts to act as the meeting host. " +
+        "Read-only; managed by the system.",
       type: "string",
       readOnly: true,
       group: "schedule",
-      hidden: ({ document }) => !document?.isVirtual,
+      hidden: ({ document }) => !document?.programFormat || document?.programFormat === "in-person",
     }),
-    defineField({
-      name: "calendarEventId",
-      title: "Google Calendar Event ID",
-      description:
-        "Set automatically. Used to update or cancel the room booking when program details change.",
-      type: "string",
-      readOnly: true,
-      group: "schedule",
-      hidden: ({ document }) => !document?.isVirtual,
-    }),
-
     // ── Step 3: Registration ──────────────────────────────────────────────────
     // Who can sign up, how many, and what questions to ask them.
 
     defineField({
       name: "registrationEnabled",
       title: "Enable Registration",
-      description: "Turns on the built-in registration form for this program",
+      description:
+        "Turns on the built-in registration form for this program. " +
+        "When enabled, a 'Register' button appears on the program page and registrants are tracked in the Volunteer Area. " +
+        "Leave off for drop-in programs, public events, or programs using an external registration link.",
       type: "boolean",
       initialValue: false,
       group: "registration",
@@ -254,7 +322,11 @@ export default defineType({
     defineField({
       name: "registrationDeadline",
       title: "Registration Deadline",
-      description: "Form closes automatically at this date/time",
+      description:
+        "The registration form closes automatically at this date and time — useful for courses that require preparation, " +
+        "ordering materials, or confirming attendance in advance. " +
+        "After this point, the 'Register' button is hidden and late registrations require staff assistance. " +
+        "Leave blank for programs with open registration.",
       type: "datetime",
       group: "registration",
     }),
@@ -367,7 +439,11 @@ export default defineType({
     defineField({
       name: "reminderDate",
       title: "Reminder Email Date",
-      description: "The system will automatically send a reminder email to all registrants on this date.",
+      description:
+        "The system sends a reminder email to all active registrants at 9:00 AM Central on this date. " +
+        "Set it 1–3 days before the program start — enough notice to prepare, not so early it's forgotten. " +
+        "⚠ For virtual programs: make sure the Meeting Link (Step 2) is set before this date — " +
+        "the reminder email includes the link and registrants use it to join.",
       type: "datetime",
       group: "emails",
     }),
@@ -409,7 +485,12 @@ export default defineType({
     defineField({
       name: "danaMode",
       title: "Dana Mode",
-      description: "Controls how the dana/payment step is presented in the registration form",
+      description:
+        "Controls how the dana/payment step works in the registration form. " +
+        "None — no payment collected (use for free drop-ins or programs where dana is collected in person). " +
+        "Voluntary — registrant chooses their own amount, starting from a suggested value (good for ongoing classes). " +
+        "Base + Dana — a required base fee plus optional additional dana (retreats, multi-session courses). " +
+        "Fixed — a set price with no flexibility (workshops with hard costs).",
       type: "string",
       group: "dana",
       options: {
@@ -460,7 +541,10 @@ export default defineType({
     defineField({
       name: "danaText",
       title: "Dana Info (Program Page)",
-      description: "Short dana/donation note shown on the program detail page",
+      description:
+        "A short note about dana shown on the public program page — below the registration button, visible to everyone. " +
+        "Use it to set the tone and explain the practice. " +
+        "E.g. 'This program is offered on a dana basis — pay what you can.' or 'A $20 registration fee applies; additional dana is welcome.'",
       type: "string",
       group: "dana",
     }),
@@ -471,7 +555,11 @@ export default defineType({
     defineField({
       name: "dayOfWeek",
       title: "Day of the Week",
-      description: "Controls which day(s) this program appears on the member dashboard",
+      description:
+        "Controls which day-column(s) this program appears under on the member dashboard. " +
+        "The dashboard groups programs by day so members can see what's happening on any given day of the week. " +
+        "For a program that always meets Wednesdays, select Wednesday. " +
+        "For a program that varies or has no fixed day, leave blank — it won't appear in any day column.",
       type: "array",
       of: [{ type: "reference", to: [{ type: "weekdays" }] }],
       group: "settings",
@@ -479,14 +567,20 @@ export default defineType({
     defineField({
       name: "dashboardSpecialAnnouncement",
       title: "Special Announcement",
-      description: "Appears in red on the member dashboard for this program",
+      description:
+        "Displayed in bold red on the member dashboard, directly on this program's card — visible to all logged-in members. " +
+        "Use only for important, time-sensitive notices: 'Cancelled this week', 'Location change — see email', 'No session on July 4th'. " +
+        "Keep it short (one sentence). Clear it as soon as it's no longer relevant so it doesn't lose its urgency.",
       type: "string",
       group: "settings",
     }),
     defineField({
       name: "dashboardEarlyArrivalMessage",
       title: "Early Arrival Message",
-      description: "Appears in grey on the member dashboard for this program",
+      description:
+        "A quiet, standing note shown in muted text on the member dashboard card — typically about arrival or setup. " +
+        "Use for stable, recurring guidance that applies week to week: 'Doors open at 6:45pm for settling in' or 'Arrive 5 minutes early to find a seat.' " +
+        "This is not for urgent announcements — use Special Announcement (above) for those.",
       type: "string",
       group: "settings",
     }),
@@ -515,6 +609,7 @@ export default defineType({
       initialValue: false,
       group: "settings",
     }),
+
   ],
   orderings: [
     {
