@@ -128,8 +128,11 @@ export default defineType({
 
     defineField({
       name: "dateText",
-      title: "Date & Time Label",
-      description: 'Display text shown on the program page — e.g. "Every Wednesday, 6–7:30pm" or "June 7–9 · 9am–5pm"',
+      title: "Date & Time Label (override)",
+      description:
+        "Leave blank — this label is auto-generated from Start Date & Time, End Date & Time, and the recurrence fields below. " +
+        "It appears on the program page, listing cards, member dashboard, and in confirmation and reminder emails. " +
+        "Only fill this in if the generated label isn't right for this program (e.g. a multi-week retreat with a custom date range).",
       type: "string",
       group: "schedule",
     }),
@@ -200,8 +203,12 @@ export default defineType({
     }),
     defineField({
       name: "recurrenceCount",
-      title: "Number of Sessions",
-      description: "Total sessions including the first. E.g. a 4-week Wednesday course = 4.",
+      title: "Number of Sessions (leave blank for ongoing)",
+      description:
+        "Leave blank for ongoing programs that repeat indefinitely until you turn them off — " +
+        "weekly drop-ins, Saturday sits, or any program with no fixed end date. " +
+        "Fill in a number only for fixed-length series: e.g. '4' for a 4-week course, '6' for a 6-session retreat. " +
+        "Members who add the event to their calendar will get all sessions loaded at once.",
       type: "number",
       group: "schedule",
       hidden: ({ document }) => !document?.recurrenceFreq,
@@ -242,7 +249,7 @@ export default defineType({
       group: "schedule",
       options: {
         list: [
-          { title: "At RIM (16905 W. Bluemound Rd., Brookfield)", value: "at-rim" },
+          { title: "At RIM (4040 N. Calhoun Rd., Brookfield)", value: "at-rim" },
           { title: "Other location", value: "other" },
         ],
         layout: "radio",
@@ -587,7 +594,20 @@ export default defineType({
     defineField({
       name: "removeFromProgramList",
       title: "Hide from Member Dashboard",
-      description: "When checked, this program will not appear on the member dashboard drop-in list",
+      description:
+        "Hides this program from the member dashboard drop-in list and session tracker. " +
+        "Does NOT affect the public Programs & Events page (use the other toggle below for that).",
+      type: "boolean",
+      initialValue: false,
+      group: "settings",
+    }),
+    defineField({
+      name: "hideFromProgramPageList",
+      title: "Hide from Programs & Events Page",
+      description:
+        "Hides this program from the public Programs & Events listing page. " +
+        "The program's own page is still accessible by direct link. " +
+        "Does NOT affect the member dashboard (use the toggle above for that).",
       type: "boolean",
       initialValue: false,
       group: "settings",
@@ -597,16 +617,6 @@ export default defineType({
       title: "Sort Order",
       description: "Lower numbers appear first on all listing pages",
       type: "number",
-      group: "settings",
-    }),
-    defineField({
-      name: "hideFromProgramPageList",
-      title: "Hide from Programs & Events Page",
-      description:
-        "When checked, this program will NOT appear on the public Programs & Events page. " +
-        "The program's own page is still accessible by direct link.",
-      type: "boolean",
-      initialValue: false,
       group: "settings",
     }),
 
