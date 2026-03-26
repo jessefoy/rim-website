@@ -6,6 +6,7 @@ import teams from "./teams";
 import glossary from "./glossary";
 import magazineArticles from "./magazineArticles";
 import volunteerPositions from "./volunteerPositions";
+import richContent from "./richContent";
 import lessons from "./lessons";
 import courses from "./courses";
 import classRecordings from "./classRecordings";
@@ -24,6 +25,9 @@ export const schemaTypes = [
   // Content (standalone)
   glossary,
   magazineArticles,
+
+  // Shared types
+  richContent,
 
   // Content (with references)
   volunteerPositions,

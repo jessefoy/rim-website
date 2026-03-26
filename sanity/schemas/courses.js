@@ -62,6 +62,20 @@ export default defineType({
       of: [{ type: "reference", to: [{ type: "lessons" }] }],
     }),
     defineField({
+      name: "accessLevel",
+      title: "Access Level",
+      type: "string",
+      description: "Who can view this course. 'All Members' = any logged-in user. 'Registration Required' = must have an active registration for a linked program.",
+      options: {
+        list: [
+          { title: "All Members (any logged-in user)", value: "members" },
+          { title: "Registration Required", value: "registration_required" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "members",
+    }),
+    defineField({
       name: "hideFromMemberProfilePage",
       title: "Hide From Member Profile Page",
       type: "boolean",

@@ -25,7 +25,10 @@ export default defineType({
     }),
     defineField({
       name: "hideFromProgramsPage",
-      title: "Hide from Programs Page",
+      title: "Hide from Programs & Events Listing Page",
+      description:
+        "When checked, this entire category — and all programs within it — " +
+        "will be hidden from the public Programs & Events page.",
       type: "boolean",
       initialValue: false,
     }),
